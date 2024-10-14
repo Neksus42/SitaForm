@@ -17,6 +17,11 @@ bool validation(std::string tovalidate, std::string parameter)
 bool validation_digits(std::string tovalidate)
 {
 
+    return validation(tovalidate, "[0-9]*");
+}
+bool validation_phone(std::string tovalidate)
+{
+
     return validation(tovalidate, "\\+375[0-9]{9}");
 }
 
@@ -41,7 +46,7 @@ void main(array<String^>^ args)
         driver = sql::mysql::get_mysql_driver_instance();
         con = driver->connect("localhost", "root", "1111");
 
-        con->setSchema("mainbase");
+        con->setSchema("sita");
 
         
        /* stmt = con->createStatement();*/
@@ -66,15 +71,15 @@ void main(array<String^>^ args)
         ////delete stmt;
         ////delete con;
         
-      
+    //form.UpdateButtonText("gfdg");
+        SitaForm::MyForm form;
+        //form.Initialize(con, stmt, res);
+        Application::Run(% form);
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Error: " << e.what() << std::endl;
     }
-    //form.UpdateButtonText("gfdg");
-    SitaForm::MyForm form;
-    //form.Initialize(con, stmt, res);
-    Application::Run(% form);
+   
    
 }
 
@@ -94,7 +99,12 @@ void SitaForm::MyForm::addclient()
         std::string name = ConvertString(this->ClientNameBox->Text);
         std::cout << "Name: " + name + "\n";
         std::cout << "Phone: " + phone + "\n";
-        if (!(validation_digits(phone)))
+        if (name == "")
+        {
+            this->label4->Text = L"Введите имя клиента";
+            return;
+        }
+        if (!(validation_phone(phone)))
         {
             this->label4->Text = L"Неправильный формат номера";
             return;
@@ -116,6 +126,84 @@ void SitaForm::MyForm::addclient()
             stmt = con->createStatement();
             stmt->executeUpdate(addclient);
             this->label4->Text = L"Клиент успешно добавлен";
+        }
+
+    }
+    catch (sql::SQLException& e)
+    {
+        std::cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+void SitaForm::MyForm::show_all_clients()
+{
+    try
+    {
+        // Создание SQL-запроса для получения всех клиентов
+        std::string selectQuery = "SELECT * FROM sita.customers;";
+        stmt = con->createStatement();
+        res = stmt->executeQuery(selectQuery);
+
+        // Создаем DataTable для хранения данных
+        System::Data::DataTable^ dataTable = gcnew System::Data::DataTable();
+
+        // Заполняем DataTable данными из ResultSet
+        dataTable->Columns->Add("ID", int::typeid);
+        dataTable->Columns->Add("Name", String::typeid);
+        dataTable->Columns->Add("ContactInfo", String::typeid);
+
+        while (res->next())
+        {
+            
+            int id = res->getInt("idCustomer");
+            std::string name = res->getString("Name");
+            std::string contactInfo = res->getString("ContactInfo");
+            std::cerr << "id" + std::to_string(id) << std::endl;
+            dataTable->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()));
+        }
+
+        // Устанавливаем DataTable как источник данных для DataGridView
+        this->dataGridView1->DataSource = dataTable;
+    }
+    catch (sql::SQLException& e)
+    {
+        MessageBox::Show(gcnew String(e.what()), "SQL Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+}
+void SitaForm::MyForm::delete_client()
+{
+    try
+    {
+        std::string id = ConvertString(this->ClientID->Text);
+       
+        std::cout << "ID: " + id + "\n";
+        
+        if (id == "")
+        {
+            this->label7->Text = L"Введите id клиента";
+            return;
+        }
+        if (!(validation_digits(id)))
+        {
+            this->label7->Text = L"Введите id клиента";
+            return;
+        }
+
+        std::string checkexisted = "SELECT * FROM sita.customers where idCustomer = '" + id + "';";
+        std::cout << checkexisted + "\n";
+        stmt = con->createStatement();
+        res = stmt->executeQuery(checkexisted);
+        if (!(res->next()))
+        {
+            this->label7->Text = L"Такого клиента не существует";
+
+        }
+        else
+        {
+            std::string addclient = "DELETE FROM `sita`.`customers` WHERE (`idCustomer` = '"+id+"');";
+            std::cout << addclient + "\n";
+            stmt = con->createStatement();
+            stmt->executeUpdate(addclient);
+            this->label7->Text = L"Клиент успешно удален";
         }
 
     }
