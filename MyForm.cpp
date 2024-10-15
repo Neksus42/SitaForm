@@ -75,6 +75,7 @@ void main(array<String^>^ args)
         SitaForm::MyForm form;
         //form.Initialize(con, stmt, res);
         Application::Run(% form);
+        
     }
     catch (sql::SQLException& e) {
         std::cerr << "SQL Error: " << e.what() << std::endl;

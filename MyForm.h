@@ -100,6 +100,17 @@ namespace SitaForm {
 
 	private: System::Windows::Forms::Label^ label15;
 	private: System::Windows::Forms::TextBox^ Employee_Post_Box;
+	private: System::Windows::Forms::Label^ label8;
+	private: System::Windows::Forms::Label^ label11;
+	private: System::Windows::Forms::Label^ label16;
+	private: System::Windows::Forms::TextBox^ textBox1;
+	private: System::Windows::Forms::Label^ label17;
+	private: System::Windows::Forms::Label^ label18;
+	private: System::Windows::Forms::TextBox^ textBox2;
+	private: System::Windows::Forms::TextBox^ textBox3;
+	private: System::Windows::Forms::ComboBox^ comboBox1;
+
+
 
 
 	protected:
@@ -161,13 +172,23 @@ namespace SitaForm {
 			this->Employee_name_Box = (gcnew System::Windows::Forms::TextBox());
 			this->Employee_phone_Box = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->label16 = (gcnew System::Windows::Forms::Label());
+			this->textBox1 = (gcnew System::Windows::Forms::TextBox());
+			this->label17 = (gcnew System::Windows::Forms::Label());
+			this->label18 = (gcnew System::Windows::Forms::Label());
+			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
+			this->textBox3 = (gcnew System::Windows::Forms::TextBox());
+			this->label8 = (gcnew System::Windows::Forms::Label());
+			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
 			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
 			this->tabPage2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_employee))->BeginInit();
+			this->tabPage3->SuspendLayout();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -545,11 +566,98 @@ namespace SitaForm {
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->comboBox1);
+			this->tabPage3->Controls->Add(this->label16);
+			this->tabPage3->Controls->Add(this->textBox1);
+			this->tabPage3->Controls->Add(this->label17);
+			this->tabPage3->Controls->Add(this->label18);
+			this->tabPage3->Controls->Add(this->textBox2);
+			this->tabPage3->Controls->Add(this->textBox3);
+			this->tabPage3->Controls->Add(this->label8);
+			this->tabPage3->Controls->Add(this->label11);
 			this->tabPage3->Location = System::Drawing::Point(10, 65);
 			this->tabPage3->Name = L"tabPage3";
 			this->tabPage3->Size = System::Drawing::Size(1728, 901);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Заказы";
+			
+			// 
+			// label16
+			// 
+			this->label16->AutoSize = true;
+			this->label16->Location = System::Drawing::Point(111, 243);
+			this->label16->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label16->Name = L"label16";
+			this->label16->Size = System::Drawing::Size(120, 47);
+			this->label16->TabIndex = 41;
+			this->label16->Text = L"Цена";
+			
+			// 
+			// textBox1
+			// 
+			this->textBox1->Location = System::Drawing::Point(455, 243);
+			this->textBox1->Margin = System::Windows::Forms::Padding(7);
+			this->textBox1->Name = L"textBox1";
+			this->textBox1->Size = System::Drawing::Size(370, 56);
+			this->textBox1->TabIndex = 40;
+			// 
+			// label17
+			// 
+			this->label17->AutoSize = true;
+			this->label17->Location = System::Drawing::Point(55, 163);
+			this->label17->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label17->Name = L"label17";
+			this->label17->Size = System::Drawing::Size(290, 47);
+			this->label17->TabIndex = 39;
+			this->label17->Text = L"Статус заказа";
+			
+			// 
+			// label18
+			// 
+			this->label18->AutoSize = true;
+			this->label18->Location = System::Drawing::Point(67, 85);
+			this->label18->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label18->Name = L"label18";
+			this->label18->Size = System::Drawing::Size(228, 47);
+			this->label18->TabIndex = 38;
+			this->label18->Text = L"ID клиента";
+			// 
+			// textBox2
+			// 
+			this->textBox2->Location = System::Drawing::Point(455, 85);
+			this->textBox2->Margin = System::Windows::Forms::Padding(7);
+			this->textBox2->Name = L"textBox2";
+			this->textBox2->Size = System::Drawing::Size(370, 56);
+			this->textBox2->TabIndex = 36;
+			// 
+			// textBox3
+			// 
+			this->textBox3->Location = System::Drawing::Point(455, 163);
+			this->textBox3->Margin = System::Windows::Forms::Padding(7);
+			this->textBox3->Name = L"textBox3";
+			this->textBox3->Size = System::Drawing::Size(370, 56);
+			this->textBox3->TabIndex = 37;
+			// 
+			// label8
+			// 
+			this->label8->AutoSize = true;
+			this->label8->Location = System::Drawing::Point(1131, 21);
+			this->label8->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label8->Name = L"label8";
+			this->label8->Size = System::Drawing::Size(461, 47);
+			this->label8->TabIndex = 31;
+			this->label8->Text = L"Устройство для заказа";
+			
+			// 
+			// label11
+			// 
+			this->label11->AutoSize = true;
+			this->label11->Location = System::Drawing::Point(208, 21);
+			this->label11->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label11->Name = L"label11";
+			this->label11->Size = System::Drawing::Size(412, 47);
+			this->label11->TabIndex = 30;
+			this->label11->Text = L"Составление заказа";
 			// 
 			// tabPage4
 			// 
@@ -564,6 +672,17 @@ namespace SitaForm {
 			this->tabPage5->Name = L"tabPage5";
 			this->tabPage5->Size = System::Drawing::Size(1728, 901);
 			this->tabPage5->TabIndex = 4;
+			// 
+			// comboBox1
+			// 
+			this->comboBox1->FormattingEnabled = true;
+			this->comboBox1->Location = System::Drawing::Point(455, 390);
+			this->comboBox1->Name = L"comboBox1";
+			this->comboBox1->Size = System::Drawing::Size(370, 55);
+			this->comboBox1->TabIndex = 42;
+			this->comboBox1->Items->Add("ttre");
+			this->comboBox1->Items->Add("tfdsf");
+			this->comboBox1->Items->Add("fdsf");
 			// 
 			// MyForm
 			// 
@@ -581,6 +700,8 @@ namespace SitaForm {
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_employee))->EndInit();
+			this->tabPage3->ResumeLayout(false);
+			this->tabPage3->PerformLayout();
 			this->ResumeLayout(false);
 
 		}
@@ -620,6 +741,9 @@ private: System::Void button_showall_employee_Click(System::Object^ sender, Syst
 private: System::Void button_delete_employee_Click(System::Object^ sender, System::EventArgs^ e) {
 	delete_employee();
 }
+
+
+
 };
 	
 }
