@@ -204,6 +204,7 @@ void SitaForm::MyForm::delete_client()
             stmt = con->createStatement();
             stmt->executeUpdate(addclient);
             this->label7->Text = L"Клиент успешно удален";
+            SitaForm::MyForm::show_all_clients();
         }
 
     }
@@ -212,7 +213,131 @@ void SitaForm::MyForm::delete_client()
         std::cerr << "SQL Error: " << e.what() << std::endl;
     }
 }
-void SitaForm::MyForm::UpdateLabel(String^ text)
+void SitaForm::MyForm::add_employee()
 {
-    this->label4->Text = text;
+    try
+    {
+        std::string post = ConvertString(this->Employee_Post_Box->Text);
+        std::string phone = ConvertString(this->Employee_phone_Box->Text);
+        std::string name = ConvertString(this->Employee_name_Box->Text);
+        std::cout << "E_Name: " + name + "\n";
+        std::cout << "E_Phone: " + phone + "\n";
+        std::cout << "E_Post: " + post + "\n";
+        if (name == "")
+        {
+            this->label_add_employee->Text = L"Введите имя работника";
+            return;
+        }
+        if (!(validation_phone(phone)))
+        {
+            this->label_add_employee->Text = L"Неправильный формат номера";
+            return;
+        }
+
+        std::string checkexisted = "SELECT * FROM sita.employee where Telephone_number ="+phone+";";
+        std::cout << checkexisted + "\n";
+        stmt = con->createStatement();
+        res = stmt->executeQuery(checkexisted);
+        if ((res->next()))
+        {
+            this->label_add_employee->Text = L"Такой номер уже существует";
+
+        }
+        else
+        {
+            std::string addclient = "INSERT INTO `sita`.`employee` (`Name`, `Post`, `Telephone_number`) VALUES ('" + name + "', '" + post + "', '"+phone+"');";
+
+            std::cout << addclient + "\n";
+            stmt = con->createStatement();
+            stmt->executeUpdate(addclient);
+            this->label_add_employee->Text = L"Работник успешно добавлен";
+        }
+
+    }
+    catch (sql::SQLException& e)
+    {
+        std::cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void SitaForm::MyForm::delete_employee()
+{
+    try
+    {
+        std::string id = ConvertString(this->Employee_ID_Box->Text);
+
+        std::cout << "ID: " + id + "\n";
+
+        if (id == "")
+        {
+            this->label_del_employee->Text = L"Введите id работника";
+            return;
+        }
+        if (!(validation_digits(id)))
+        {
+            this->label_del_employee->Text = L"Введите id работника";
+            return;
+        }
+
+        std::string checkexisted = "SELECT * FROM sita.employee where idEmployee = '" + id + "';";
+        std::cout << checkexisted + "\n";
+        stmt = con->createStatement();
+        res = stmt->executeQuery(checkexisted);
+        if (!(res->next()))
+        {
+            this->label_del_employee->Text = L"Такого работника не существует";
+
+        }
+        else
+        {
+            std::string addclient = "DELETE FROM `sita`.`employee` WHERE (`idEmployee` = '" + id + "');";
+            std::cout << addclient + "\n";
+            stmt = con->createStatement();
+            stmt->executeUpdate(addclient);
+            this->label_del_employee->Text = L"Работник успешно удален";
+            SitaForm::MyForm::show_all_employee();
+        }
+
+    }
+    catch (sql::SQLException& e)
+    {
+        std::cerr << "SQL Error: " << e.what() << std::endl;
+    }
+}
+
+void SitaForm::MyForm::show_all_employee()
+{
+    try
+    {
+        // Создание SQL-запроса для получения всех клиентов
+        std::string selectQuery = "SELECT * FROM sita.employee;";
+        stmt = con->createStatement();
+        res = stmt->executeQuery(selectQuery);
+
+        // Создаем DataTable для хранения данных
+        System::Data::DataTable^ dataTable2 = gcnew System::Data::DataTable();
+
+        // Заполняем DataTable данными из ResultSet
+        dataTable2->Columns->Add("ID", int::typeid);
+        dataTable2->Columns->Add("Name", String::typeid);
+        dataTable2->Columns->Add("Telephone number", String::typeid);
+        dataTable2->Columns->Add("Post", String::typeid);
+        while (res->next())
+        {
+
+            int id = res->getInt("idEmployee");
+            std::string name = res->getString("Name");
+            std::string contactInfo = res->getString("Telephone_number");
+            std::string post = res->getString("Post");
+            std::cerr << "id" + std::to_string(id) << std::endl;
+            dataTable2->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()),gcnew String(post.c_str()));
+        }
+
+        // Устанавливаем DataTable как источник данных для DataGridView
+        this->dataGridView2_employee->DataSource = dataTable2;
+    }
+    catch (sql::SQLException& e)
+    {
+        MessageBox::Show(gcnew String(e.what()), "SQL Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
 }
