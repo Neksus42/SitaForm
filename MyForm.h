@@ -1,5 +1,22 @@
 #pragma once
+
+#include <mysql_driver.h>
+#include <mysql_connection.h>
+#include <cppconn/driver.h>
+#include <cppconn/exception.h>
+#include <cppconn/statement.h>
 #include<string>
+#include <msclr/marshal_cppstd.h>
+#include <regex>
+#include<thread>
+#include<chrono>
+bool validation(std::string tovalidate, std::string parameter);
+bool validation_digits(std::string tovalidate);
+bool validation_phone(std::string tovalidate);
+extern sql::mysql::MySQL_Driver* driver;
+extern sql::Connection* con;
+extern sql::Statement* stmt;
+extern sql::ResultSet* res;
 namespace SitaForm {
 
 	using namespace System;
@@ -130,6 +147,23 @@ private: System::Windows::Forms::Button^ button_show_orders;
 private: System::Windows::Forms::TextBox^ textBox_forOrder;
 private: System::Windows::Forms::Button^ button_selected_order;
 private: System::Windows::Forms::Button^ button_delete_order;
+private: System::Windows::Forms::Label^ label22;
+private: System::Windows::Forms::TextBox^ textBox_order_forreport;
+
+private: System::Windows::Forms::Label^ label_23;
+private: System::Windows::Forms::RichTextBox^ richTextBox1_for_problem;
+private: System::Windows::Forms::Label^ label23;
+private: System::Windows::Forms::RichTextBox^ richTextBox1_for_recommendtaion;
+private: System::Windows::Forms::Label^ label24;
+private: System::Windows::Forms::Button^ button4;
+private: System::Windows::Forms::Label^ label_for_reports;
+private: System::Windows::Forms::DataGridView^ dataGridView2_reports;
+
+private: System::Windows::Forms::Button^ button_show_reports;
+private: System::Windows::Forms::TextBox^ textBox_selected_report;
+private: System::Windows::Forms::Button^ button6;
+private: System::Windows::Forms::Button^ button5;
+
 
 
 
@@ -229,7 +263,21 @@ private: System::Windows::Forms::Button^ button_delete_order;
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->textBox_selected_report = (gcnew System::Windows::Forms::TextBox());
+			this->button_show_reports = (gcnew System::Windows::Forms::Button());
+			this->dataGridView2_reports = (gcnew System::Windows::Forms::DataGridView());
+			this->label_for_reports = (gcnew System::Windows::Forms::Label());
+			this->button4 = (gcnew System::Windows::Forms::Button());
+			this->richTextBox1_for_recommendtaion = (gcnew System::Windows::Forms::RichTextBox());
+			this->label24 = (gcnew System::Windows::Forms::Label());
+			this->richTextBox1_for_problem = (gcnew System::Windows::Forms::RichTextBox());
+			this->label23 = (gcnew System::Windows::Forms::Label());
+			this->label22 = (gcnew System::Windows::Forms::Label());
+			this->textBox_order_forreport = (gcnew System::Windows::Forms::TextBox());
+			this->label_23 = (gcnew System::Windows::Forms::Label());
 			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
+			this->button5 = (gcnew System::Windows::Forms::Button());
+			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -237,6 +285,8 @@ private: System::Windows::Forms::Button^ button_delete_order;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_employee))->BeginInit();
 			this->tabPage3->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_Orders))->BeginInit();
+			this->tabPage4->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_reports))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -893,11 +943,156 @@ private: System::Windows::Forms::Button^ button_delete_order;
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->button6);
+			this->tabPage4->Controls->Add(this->button5);
+			this->tabPage4->Controls->Add(this->textBox_selected_report);
+			this->tabPage4->Controls->Add(this->button_show_reports);
+			this->tabPage4->Controls->Add(this->dataGridView2_reports);
+			this->tabPage4->Controls->Add(this->label_for_reports);
+			this->tabPage4->Controls->Add(this->button4);
+			this->tabPage4->Controls->Add(this->richTextBox1_for_recommendtaion);
+			this->tabPage4->Controls->Add(this->label24);
+			this->tabPage4->Controls->Add(this->richTextBox1_for_problem);
+			this->tabPage4->Controls->Add(this->label23);
+			this->tabPage4->Controls->Add(this->label22);
+			this->tabPage4->Controls->Add(this->textBox_order_forreport);
+			this->tabPage4->Controls->Add(this->label_23);
 			this->tabPage4->Location = System::Drawing::Point(10, 65);
 			this->tabPage4->Margin = System::Windows::Forms::Padding(2);
 			this->tabPage4->Name = L"tabPage4";
 			this->tabPage4->Size = System::Drawing::Size(2075, 1199);
 			this->tabPage4->TabIndex = 3;
+			this->tabPage4->Text = L"Отчёты";
+			this->tabPage4->Click += gcnew System::EventHandler(this, &MyForm::tabPage4_Click);
+			// 
+			// textBox_selected_report
+			// 
+			this->textBox_selected_report->ForeColor = System::Drawing::Color::LightGray;
+			this->textBox_selected_report->Location = System::Drawing::Point(28, 803);
+			this->textBox_selected_report->Name = L"textBox_selected_report";
+			this->textBox_selected_report->Size = System::Drawing::Size(445, 56);
+			this->textBox_selected_report->TabIndex = 56;
+			this->textBox_selected_report->Text = L"Введите ID отчёта...";
+			this->textBox_selected_report->Enter += gcnew System::EventHandler(this, &MyForm::textBox1_Enter);
+			this->textBox_selected_report->Leave += gcnew System::EventHandler(this, &MyForm::textBox1_Leave);
+			// 
+			// button_show_reports
+			// 
+			this->button_show_reports->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button_show_reports->Location = System::Drawing::Point(28, 700);
+			this->button_show_reports->Margin = System::Windows::Forms::Padding(7);
+			this->button_show_reports->Name = L"button_show_reports";
+			this->button_show_reports->Size = System::Drawing::Size(445, 78);
+			this->button_show_reports->TabIndex = 55;
+			this->button_show_reports->Text = L"Показать отчёты";
+			this->button_show_reports->UseVisualStyleBackColor = false;
+			this->button_show_reports->Click += gcnew System::EventHandler(this, &MyForm::button_show_reports_Click);
+			// 
+			// dataGridView2_reports
+			// 
+			this->dataGridView2_reports->AllowUserToAddRows = false;
+			this->dataGridView2_reports->AllowUserToDeleteRows = false;
+			this->dataGridView2_reports->AllowUserToResizeColumns = false;
+			this->dataGridView2_reports->AllowUserToResizeRows = false;
+			this->dataGridView2_reports->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView2_reports->BackgroundColor = System::Drawing::Color::Tomato;
+			this->dataGridView2_reports->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView2_reports->Location = System::Drawing::Point(501, 748);
+			this->dataGridView2_reports->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView2_reports->Name = L"dataGridView2_reports";
+			this->dataGridView2_reports->ReadOnly = true;
+			this->dataGridView2_reports->RowHeadersWidth = 92;
+			this->dataGridView2_reports->RowTemplate->Height = 37;
+			this->dataGridView2_reports->Size = System::Drawing::Size(1469, 435);
+			this->dataGridView2_reports->TabIndex = 54;
+			this->dataGridView2_reports->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_reports_CellClick);
+			// 
+			// label_for_reports
+			// 
+			this->label_for_reports->AutoSize = true;
+			this->label_for_reports->Location = System::Drawing::Point(833, 104);
+			this->label_for_reports->Name = L"label_for_reports";
+			this->label_for_reports->Size = System::Drawing::Size(401, 47);
+			this->label_for_reports->TabIndex = 51;
+			this->label_for_reports->Text = L"Отображение отчет";
+			// 
+			// button4
+			// 
+			this->button4->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button4->Location = System::Drawing::Point(28, 581);
+			this->button4->Margin = System::Windows::Forms::Padding(7);
+			this->button4->Name = L"button4";
+			this->button4->Size = System::Drawing::Size(445, 105);
+			this->button4->TabIndex = 50;
+			this->button4->Text = L"Добавить отчёт";
+			this->button4->UseVisualStyleBackColor = false;
+			this->button4->Click += gcnew System::EventHandler(this, &MyForm::button4_Click_1);
+			// 
+			// richTextBox1_for_recommendtaion
+			// 
+			this->richTextBox1_for_recommendtaion->BackColor = System::Drawing::SystemColors::Info;
+			this->richTextBox1_for_recommendtaion->Location = System::Drawing::Point(501, 504);
+			this->richTextBox1_for_recommendtaion->Name = L"richTextBox1_for_recommendtaion";
+			this->richTextBox1_for_recommendtaion->Size = System::Drawing::Size(1469, 182);
+			this->richTextBox1_for_recommendtaion->TabIndex = 46;
+			this->richTextBox1_for_recommendtaion->Text = L"";
+			// 
+			// label24
+			// 
+			this->label24->AutoSize = true;
+			this->label24->Location = System::Drawing::Point(99, 504);
+			this->label24->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label24->Name = L"label24";
+			this->label24->Size = System::Drawing::Size(303, 47);
+			this->label24->TabIndex = 45;
+			this->label24->Text = L"Рекомендации";
+			this->label24->Click += gcnew System::EventHandler(this, &MyForm::label24_Click);
+			// 
+			// richTextBox1_for_problem
+			// 
+			this->richTextBox1_for_problem->Location = System::Drawing::Point(501, 204);
+			this->richTextBox1_for_problem->Name = L"richTextBox1_for_problem";
+			this->richTextBox1_for_problem->Size = System::Drawing::Size(1469, 283);
+			this->richTextBox1_for_problem->TabIndex = 44;
+			this->richTextBox1_for_problem->Text = L"";
+			// 
+			// label23
+			// 
+			this->label23->AutoSize = true;
+			this->label23->Location = System::Drawing::Point(51, 204);
+			this->label23->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label23->Name = L"label23";
+			this->label23->Size = System::Drawing::Size(422, 47);
+			this->label23->TabIndex = 43;
+			this->label23->Text = L"Описание проблемы";
+			// 
+			// label22
+			// 
+			this->label22->AutoSize = true;
+			this->label22->Location = System::Drawing::Point(51, 107);
+			this->label22->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label22->Name = L"label22";
+			this->label22->Size = System::Drawing::Size(200, 47);
+			this->label22->TabIndex = 41;
+			this->label22->Text = L"ID заказа";
+			// 
+			// textBox_order_forreport
+			// 
+			this->textBox_order_forreport->Location = System::Drawing::Point(417, 101);
+			this->textBox_order_forreport->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_forreport->Name = L"textBox_order_forreport";
+			this->textBox_order_forreport->Size = System::Drawing::Size(370, 56);
+			this->textBox_order_forreport->TabIndex = 40;
+			// 
+			// label_23
+			// 
+			this->label_23->AutoSize = true;
+			this->label_23->Location = System::Drawing::Point(170, 36);
+			this->label_23->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label_23->Name = L"label_23";
+			this->label_23->Size = System::Drawing::Size(414, 47);
+			this->label_23->TabIndex = 39;
+			this->label_23->Text = L"Составление отчёта";
 			// 
 			// tabPage5
 			// 
@@ -906,6 +1101,29 @@ private: System::Windows::Forms::Button^ button_delete_order;
 			this->tabPage5->Name = L"tabPage5";
 			this->tabPage5->Size = System::Drawing::Size(2075, 1199);
 			this->tabPage5->TabIndex = 4;
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button5->Location = System::Drawing::Point(28, 892);
+			this->button5->Margin = System::Windows::Forms::Padding(7);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(445, 78);
+			this->button5->TabIndex = 57;
+			this->button5->Text = L"Отобразить отчёт";
+			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
+			// 
+			// button6
+			// 
+			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button6->Location = System::Drawing::Point(28, 1005);
+			this->button6->Margin = System::Windows::Forms::Padding(7);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(445, 78);
+			this->button6->TabIndex = 58;
+			this->button6->Text = L"Показать отчёты";
+			this->button6->UseVisualStyleBackColor = false;
 			// 
 			// MyForm
 			// 
@@ -926,6 +1144,9 @@ private: System::Windows::Forms::Button^ button_delete_order;
 			this->tabPage3->ResumeLayout(false);
 			this->tabPage3->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_Orders))->EndInit();
+			this->tabPage4->ResumeLayout(false);
+			this->tabPage4->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_reports))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -1011,6 +1232,18 @@ private: System::Void dataGridView2_Orders_CellClick(System::Object^ sender, Sys
 
 private: System::Void button_delete_order_Click(System::Object^ sender, System::EventArgs^ e);
 
+private: System::Void tabPage4_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void label24_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button4_Click_1(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_show_reports_Click(System::Object^ sender, System::EventArgs^ e);
+	   private: System::String^ placeholderText_for_report = "Введите ID отчёта...";
+private: System::Void textBox1_Enter(System::Object^ sender, System::EventArgs^ e);
+private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ e); 
+private: System::Void dataGridView2_reports_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+
+private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
 };
 
 
