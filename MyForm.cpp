@@ -619,3 +619,38 @@ void SitaForm::MyForm::combobox_selected_event()
     }
 }
 
+
+
+System::Void SitaForm::MyForm::dataGridView2_Orders_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
+{
+    this->textBox_forOrder_Enter(this->textBox_forOrder, gcnew System::EventArgs());
+    this->textBox_forOrder->Text = (this->dataGridView2_Orders->Rows[e->RowIndex]->Cells[0]->Value->ToString());
+    this->textBox_forOrder_Leave(this->textBox_forOrder, gcnew System::EventArgs());
+}
+
+System::Void SitaForm::MyForm::button_delete_order_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    std::string idOrder = ConvertString(this->textBox_forOrder->Text);
+    std::cout << "id " + idOrder << std::endl;
+    std::string selectQuery = "SELECT * FROM sita.orders where OrderID = " + idOrder + ";";
+    if (!validation_digits(idOrder))
+    {
+        this->textBox_forOrder->Text = "Error";
+        return;
+    }
+    //stmt->execute("SET NAMES 'cp1251'");
+    stmt = con->createStatement();
+    res = stmt->executeQuery(selectQuery);
+    if (!(res->next()))
+    {
+        this->Order_Label->Text = "Такого заказа не существует";
+    }
+    else
+    {
+        stmt->executeUpdate("DELETE FROM `sita`.`orders` WHERE (`OrderID` = '" + idOrder + "');");
+        this->Order_Label->Text = "Заказ удалён";
+    }
+
+
+}
+
