@@ -163,6 +163,17 @@ private: System::Windows::Forms::Button^ button_show_reports;
 private: System::Windows::Forms::TextBox^ textBox_selected_report;
 private: System::Windows::Forms::Button^ button6;
 private: System::Windows::Forms::Button^ button5;
+private: System::Windows::Forms::Button^ button_for_making_order;
+private: System::Windows::Forms::Label^ label25;
+private: System::Windows::Forms::Label^ label26;
+private: System::Windows::Forms::Label^ label27;
+private: System::Windows::Forms::TextBox^ textBox_order_idemployee;
+private: System::Windows::Forms::TextBox^ textBox_order_foridorder;
+private: System::Windows::Forms::Label^ label_for_asign;
+private: System::Windows::Forms::Button^ button_show_all_asign;
+private: System::Windows::Forms::DataGridView^ dataGridView_for_asign;
+private: System::Windows::Forms::Button^ button7;
+private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 
 
 
@@ -263,6 +274,8 @@ private: System::Windows::Forms::Button^ button5;
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox_selected_report = (gcnew System::Windows::Forms::TextBox());
 			this->button_show_reports = (gcnew System::Windows::Forms::Button());
 			this->dataGridView2_reports = (gcnew System::Windows::Forms::DataGridView());
@@ -276,8 +289,17 @@ private: System::Windows::Forms::Button^ button5;
 			this->textBox_order_forreport = (gcnew System::Windows::Forms::TextBox());
 			this->label_23 = (gcnew System::Windows::Forms::Label());
 			this->tabPage5 = (gcnew System::Windows::Forms::TabPage());
-			this->button5 = (gcnew System::Windows::Forms::Button());
-			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->button7 = (gcnew System::Windows::Forms::Button());
+			this->textBox_for_selected_asign = (gcnew System::Windows::Forms::TextBox());
+			this->dataGridView_for_asign = (gcnew System::Windows::Forms::DataGridView());
+			this->button_show_all_asign = (gcnew System::Windows::Forms::Button());
+			this->label_for_asign = (gcnew System::Windows::Forms::Label());
+			this->button_for_making_order = (gcnew System::Windows::Forms::Button());
+			this->label25 = (gcnew System::Windows::Forms::Label());
+			this->label26 = (gcnew System::Windows::Forms::Label());
+			this->label27 = (gcnew System::Windows::Forms::Label());
+			this->textBox_order_idemployee = (gcnew System::Windows::Forms::TextBox());
+			this->textBox_order_foridorder = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -287,6 +309,8 @@ private: System::Windows::Forms::Button^ button5;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_Orders))->BeginInit();
 			this->tabPage4->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_reports))->BeginInit();
+			this->tabPage5->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_for_asign))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -965,6 +989,30 @@ private: System::Windows::Forms::Button^ button5;
 			this->tabPage4->Text = L"Отчёты";
 			this->tabPage4->Click += gcnew System::EventHandler(this, &MyForm::tabPage4_Click);
 			// 
+			// button6
+			// 
+			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button6->Location = System::Drawing::Point(28, 1005);
+			this->button6->Margin = System::Windows::Forms::Padding(7);
+			this->button6->Name = L"button6";
+			this->button6->Size = System::Drawing::Size(445, 78);
+			this->button6->TabIndex = 58;
+			this->button6->Text = L"Удалить отчёт";
+			this->button6->UseVisualStyleBackColor = false;
+			this->button6->Click += gcnew System::EventHandler(this, &MyForm::button6_Click);
+			// 
+			// button5
+			// 
+			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
+			this->button5->Location = System::Drawing::Point(28, 892);
+			this->button5->Margin = System::Windows::Forms::Padding(7);
+			this->button5->Name = L"button5";
+			this->button5->Size = System::Drawing::Size(445, 78);
+			this->button5->TabIndex = 57;
+			this->button5->Text = L"Отобразить отчёт";
+			this->button5->UseVisualStyleBackColor = false;
+			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
+			// 
 			// textBox_selected_report
 			// 
 			this->textBox_selected_report->ForeColor = System::Drawing::Color::LightGray;
@@ -1096,34 +1144,138 @@ private: System::Windows::Forms::Button^ button5;
 			// 
 			// tabPage5
 			// 
+			this->tabPage5->Controls->Add(this->button7);
+			this->tabPage5->Controls->Add(this->textBox_for_selected_asign);
+			this->tabPage5->Controls->Add(this->dataGridView_for_asign);
+			this->tabPage5->Controls->Add(this->button_show_all_asign);
+			this->tabPage5->Controls->Add(this->label_for_asign);
+			this->tabPage5->Controls->Add(this->button_for_making_order);
+			this->tabPage5->Controls->Add(this->label25);
+			this->tabPage5->Controls->Add(this->label26);
+			this->tabPage5->Controls->Add(this->label27);
+			this->tabPage5->Controls->Add(this->textBox_order_idemployee);
+			this->tabPage5->Controls->Add(this->textBox_order_foridorder);
 			this->tabPage5->Location = System::Drawing::Point(10, 65);
 			this->tabPage5->Margin = System::Windows::Forms::Padding(2);
 			this->tabPage5->Name = L"tabPage5";
 			this->tabPage5->Size = System::Drawing::Size(2075, 1199);
 			this->tabPage5->TabIndex = 4;
+			this->tabPage5->Text = L"Распределение заказов";
 			// 
-			// button5
+			// button7
 			// 
-			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button5->Location = System::Drawing::Point(28, 892);
-			this->button5->Margin = System::Windows::Forms::Padding(7);
-			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(445, 78);
-			this->button5->TabIndex = 57;
-			this->button5->Text = L"Отобразить отчёт";
-			this->button5->UseVisualStyleBackColor = false;
-			this->button5->Click += gcnew System::EventHandler(this, &MyForm::button5_Click);
+			this->button7->Location = System::Drawing::Point(763, 599);
+			this->button7->Name = L"button7";
+			this->button7->Size = System::Drawing::Size(363, 58);
+			this->button7->TabIndex = 56;
+			this->button7->Text = L"Удалить связь";
+			this->button7->UseVisualStyleBackColor = true;
+			this->button7->Click += gcnew System::EventHandler(this, &MyForm::button7_Click);
 			// 
-			// button6
+			// textBox_for_selected_asign
 			// 
-			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button6->Location = System::Drawing::Point(28, 1005);
-			this->button6->Margin = System::Windows::Forms::Padding(7);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(445, 78);
-			this->button6->TabIndex = 58;
-			this->button6->Text = L"Показать отчёты";
-			this->button6->UseVisualStyleBackColor = false;
+			this->textBox_for_selected_asign->ForeColor = System::Drawing::Color::LightGray;
+			this->textBox_for_selected_asign->Location = System::Drawing::Point(228, 601);
+			this->textBox_for_selected_asign->Name = L"textBox_for_selected_asign";
+			this->textBox_for_selected_asign->Size = System::Drawing::Size(417, 56);
+			this->textBox_for_selected_asign->TabIndex = 55;
+			this->textBox_for_selected_asign->Text = L"Введите ID заказа...";
+			this->textBox_for_selected_asign->Enter += gcnew System::EventHandler(this, &MyForm::textBox_for_selected_asign_Enter);
+			this->textBox_for_selected_asign->Leave += gcnew System::EventHandler(this, &MyForm::textBox_for_selected_asign_Leave);
+			// 
+			// dataGridView_for_asign
+			// 
+			this->dataGridView_for_asign->AllowUserToAddRows = false;
+			this->dataGridView_for_asign->AllowUserToDeleteRows = false;
+			this->dataGridView_for_asign->AllowUserToResizeColumns = false;
+			this->dataGridView_for_asign->AllowUserToResizeRows = false;
+			this->dataGridView_for_asign->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView_for_asign->BackgroundColor = System::Drawing::Color::CornflowerBlue;
+			this->dataGridView_for_asign->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView_for_asign->Location = System::Drawing::Point(116, 732);
+			this->dataGridView_for_asign->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView_for_asign->Name = L"dataGridView_for_asign";
+			this->dataGridView_for_asign->ReadOnly = true;
+			this->dataGridView_for_asign->RowHeadersWidth = 92;
+			this->dataGridView_for_asign->RowTemplate->Height = 37;
+			this->dataGridView_for_asign->Size = System::Drawing::Size(1848, 435);
+			this->dataGridView_for_asign->TabIndex = 54;
+			this->dataGridView_for_asign->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_for_asign_CellClick);
+			// 
+			// button_show_all_asign
+			// 
+			this->button_show_all_asign->Location = System::Drawing::Point(434, 365);
+			this->button_show_all_asign->Name = L"button_show_all_asign";
+			this->button_show_all_asign->Size = System::Drawing::Size(396, 73);
+			this->button_show_all_asign->TabIndex = 19;
+			this->button_show_all_asign->Text = L"Отобразить связи";
+			this->button_show_all_asign->UseVisualStyleBackColor = true;
+			this->button_show_all_asign->Click += gcnew System::EventHandler(this, &MyForm::button_show_all_asign_Click);
+			// 
+			// label_for_asign
+			// 
+			this->label_for_asign->AutoSize = true;
+			this->label_for_asign->Location = System::Drawing::Point(492, 500);
+			this->label_for_asign->Name = L"label_for_asign";
+			this->label_for_asign->Size = System::Drawing::Size(285, 47);
+			this->label_for_asign->TabIndex = 18;
+			this->label_for_asign->Text = L"Отображение";
+			// 
+			// button_for_making_order
+			// 
+			this->button_for_making_order->Location = System::Drawing::Point(434, 286);
+			this->button_for_making_order->Name = L"button_for_making_order";
+			this->button_for_making_order->Size = System::Drawing::Size(396, 61);
+			this->button_for_making_order->TabIndex = 17;
+			this->button_for_making_order->Text = L"Выдать заказ";
+			this->button_for_making_order->UseVisualStyleBackColor = true;
+			this->button_for_making_order->Click += gcnew System::EventHandler(this, &MyForm::button_for_making_order_Click);
+			// 
+			// label25
+			// 
+			this->label25->AutoSize = true;
+			this->label25->Location = System::Drawing::Point(220, 50);
+			this->label25->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label25->Name = L"label25";
+			this->label25->Size = System::Drawing::Size(410, 47);
+			this->label25->TabIndex = 16;
+			this->label25->Text = L"Распределить заказ";
+			// 
+			// label26
+			// 
+			this->label26->AutoSize = true;
+			this->label26->Location = System::Drawing::Point(149, 201);
+			this->label26->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label26->Name = L"label26";
+			this->label26->Size = System::Drawing::Size(200, 47);
+			this->label26->TabIndex = 15;
+			this->label26->Text = L"ID заказа";
+			// 
+			// label27
+			// 
+			this->label27->AutoSize = true;
+			this->label27->Location = System::Drawing::Point(108, 117);
+			this->label27->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label27->Name = L"label27";
+			this->label27->Size = System::Drawing::Size(277, 47);
+			this->label27->TabIndex = 14;
+			this->label27->Text = L"ID Работника";
+			// 
+			// textBox_order_idemployee
+			// 
+			this->textBox_order_idemployee->Location = System::Drawing::Point(434, 114);
+			this->textBox_order_idemployee->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_idemployee->Name = L"textBox_order_idemployee";
+			this->textBox_order_idemployee->Size = System::Drawing::Size(396, 56);
+			this->textBox_order_idemployee->TabIndex = 12;
+			// 
+			// textBox_order_foridorder
+			// 
+			this->textBox_order_foridorder->Location = System::Drawing::Point(434, 192);
+			this->textBox_order_foridorder->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_foridorder->Name = L"textBox_order_foridorder";
+			this->textBox_order_foridorder->Size = System::Drawing::Size(396, 56);
+			this->textBox_order_foridorder->TabIndex = 13;
 			// 
 			// MyForm
 			// 
@@ -1147,6 +1299,9 @@ private: System::Windows::Forms::Button^ button5;
 			this->tabPage4->ResumeLayout(false);
 			this->tabPage4->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_reports))->EndInit();
+			this->tabPage5->ResumeLayout(false);
+			this->tabPage5->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_for_asign))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -1200,20 +1355,18 @@ private: System::Void button_add_device_Click(System::Object^ sender, System::Ev
 private: System::Void button_show_orders_Click(System::Object^ sender, System::EventArgs^ e) {
 	show_all_orders();
 }
-private: System::String^ placeholderText = "Введите ID заказа..."; // Текст-подсказка
+private: System::String^ placeholderText = "Введите ID заказа..."; 
 private: System::Void textBox_forOrder_Enter(System::Object^ sender, System::EventArgs^ e) {
-	// Когда пользователь щелкает по TextBox, убираем текст-подсказку
 	if (textBox_forOrder->Text == placeholderText || textBox_forOrder->Text == "Error") {
 		textBox_forOrder->Text = "";
-		textBox_forOrder->ForeColor = System::Drawing::Color::Black; // Установите цвет текста
+		textBox_forOrder->ForeColor = System::Drawing::Color::Black; 
 	}
 
 }
 private: System::Void textBox_forOrder_Leave(System::Object^ sender, System::EventArgs^ e) {
-	// Если TextBox пуст, показываем текст-подсказку
 	if (textBox_forOrder->Text->Length == 0) {
 		textBox_forOrder->Text = placeholderText;
-		textBox_forOrder->ForeColor = System::Drawing::Color::LightGray; // Цвет подсказки
+		textBox_forOrder->ForeColor = System::Drawing::Color::LightGray; 
 		return;
 	}
 	change_combobox();
@@ -1244,6 +1397,14 @@ private: System::Void textBox1_Leave(System::Object^ sender, System::EventArgs^ 
 private: System::Void dataGridView2_reports_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 
 private: System::Void button5_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button6_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_for_making_order_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_show_all_asign_Click(System::Object^ sender, System::EventArgs^ e);
+		private: System::String^ placeholderText_for_asign = "Введите ID заказа...";
+private: System::Void textBox_for_selected_asign_Enter(System::Object^ sender, System::EventArgs^ e);
+private: System::Void textBox_for_selected_asign_Leave(System::Object^ sender, System::EventArgs^ e);
+private: System::Void dataGridView_for_asign_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
+private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e);
 };
 
 

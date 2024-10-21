@@ -68,7 +68,6 @@ void SitaForm::MyForm::selected_order()
     try
     {
         std::string idOrder = ConvertString(this->textBox_forOrder->Text);
-        // Создание SQL-запроса для получения всех клиентов
         std::string selectQuery = "SELECT * FROM sita.devices where OrderID = " + idOrder + ";";
         if (!validation_digits(idOrder))
         {
@@ -80,10 +79,8 @@ void SitaForm::MyForm::selected_order()
         res = stmt->executeQuery(selectQuery);
 
 
-        // Создаем DataTable для хранения данных
         System::Data::DataTable^ dataTable3 = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
         dataTable3->Columns->Add("idDevices", int::typeid);
         dataTable3->Columns->Add("OrderID", int::typeid);
         dataTable3->Columns->Add("DeviceType", String::typeid);
@@ -105,7 +102,6 @@ void SitaForm::MyForm::selected_order()
             dataTable3->Rows->Add(OrderID, idCustomer, gcnew String(OrderStatus.c_str()), gcnew String(OrderDate.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
         this->dataGridView2_Orders->DataSource = dataTable3;
     }
     catch (sql::SQLException& e)
@@ -211,17 +207,14 @@ void SitaForm::MyForm::show_all_orders()
     try
     {
 
-        // Создание SQL-запроса для получения всех клиентов
         std::string selectQuery = "SELECT * FROM sita.orders;";
         stmt = con->createStatement();
         //stmt->execute("SET NAMES 'cp1251'");
         stmt = con->createStatement();
         res = stmt->executeQuery(selectQuery);
 
-        // Создаем DataTable для хранения данных
         System::Data::DataTable^ dataTable3 = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
         dataTable3->Columns->Add("OrderID", int::typeid);
         dataTable3->Columns->Add("idCustomer", int::typeid);
         dataTable3->Columns->Add("OrderStatus", String::typeid);
@@ -243,7 +236,6 @@ void SitaForm::MyForm::show_all_orders()
             dataTable3->Rows->Add(OrderID, idCustomer, gcnew String(OrderStatus.c_str()), Price, gcnew String(OrderDate.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
         this->dataGridView2_Orders->DataSource = dataTable3;
     }
     catch (sql::SQLException& e)

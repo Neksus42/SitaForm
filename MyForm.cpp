@@ -56,10 +56,10 @@ void main(array<String^>^ args)
         //int count = 0;
         ////res->next();
         //
-        ////clientName = res->getString("ClientName"); // замените "client_name" на название столбца
+        ////clientName = res->getString("ClientName"); 
       
         ////String^ clientNameStr = gcnew String(clientName.c_str());
-        ////form.UpdateButtonText(clientNameStr); // Обновляем текст на кнопке
+        ////form.UpdateButtonText(clientNameStr); 
        
 
         ////delete res;
@@ -134,15 +134,15 @@ void SitaForm::MyForm::show_all_clients()
 {
     try
     {
-        // Создание SQL-запроса для получения всех клиентов
+        
         std::string selectQuery = "SELECT * FROM sita.customers;";
         stmt = con->createStatement();
         res = stmt->executeQuery(selectQuery);
         
-        // Создаем DataTable для хранения данных
+        
         System::Data::DataTable^ dataTable = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
+        
         dataTable->Columns->Add("ID", int::typeid);
         dataTable->Columns->Add("Name", String::typeid);
         dataTable->Columns->Add("ContactInfo", String::typeid);
@@ -157,7 +157,7 @@ void SitaForm::MyForm::show_all_clients()
             dataTable->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
+        
         this->dataGridView1->DataSource = dataTable;
     }
     catch (sql::SQLException& e)
@@ -306,15 +306,15 @@ void SitaForm::MyForm::show_all_employee()
     try
     {
         
-        // Создание SQL-запроса для получения всех клиентов
+        
         std::string selectQuery = "SELECT * FROM sita.employee;";
         stmt = con->createStatement();
         res = stmt->executeQuery(selectQuery);
 
-        // Создаем DataTable для хранения данных
+        
         System::Data::DataTable^ dataTable2 = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
+        
         dataTable2->Columns->Add("ID", int::typeid);
         dataTable2->Columns->Add("Name", String::typeid);
         dataTable2->Columns->Add("Telephone number", String::typeid);
@@ -330,7 +330,7 @@ void SitaForm::MyForm::show_all_employee()
             dataTable2->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()),gcnew String(post.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
+        
         this->dataGridView2_employee->DataSource = dataTable2;
     }
     catch (sql::SQLException& e)

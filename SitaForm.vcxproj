@@ -130,6 +130,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Making_Order.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Orders.cpp" />
     <ClCompile Include="reports.cpp" />

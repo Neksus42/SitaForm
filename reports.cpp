@@ -41,17 +41,14 @@ System::Void SitaForm::MyForm::button_show_reports_Click(System::Object^ sender,
     try
     {
 
-        // Создание SQL-запроса для получения всех клиентов
         std::string selectQuery = "SELECT * FROM sita.reports;";
         stmt = con->createStatement();
         //stmt->execute("SET NAMES 'cp1251'");
         
         res = stmt->executeQuery(selectQuery);
 
-        // Создаем DataTable для хранения данных
         System::Data::DataTable^ dataTable4 = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
         dataTable4->Columns->Add("idReports", int::typeid);
         dataTable4->Columns->Add("OrderID", int::typeid);
         dataTable4->Columns->Add("ReportDate", String::typeid);
@@ -71,7 +68,6 @@ System::Void SitaForm::MyForm::button_show_reports_Click(System::Object^ sender,
             dataTable4->Rows->Add(idReports, OrderID, gcnew String(ReportDate.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
         this->dataGridView2_reports->DataSource = dataTable4;
     }
     catch (sql::SQLException& e)
@@ -84,7 +80,7 @@ System::Void SitaForm::MyForm::textBox1_Enter(System::Object^ sender, System::Ev
 {
     if (textBox_selected_report->Text == placeholderText_for_report || textBox_selected_report->Text == "Error") {
         textBox_selected_report->Text = "";
-        textBox_selected_report->ForeColor = System::Drawing::Color::Black; // Установите цвет текста
+        textBox_selected_report->ForeColor = System::Drawing::Color::Black; 
     }
 }
 
@@ -92,7 +88,7 @@ System::Void SitaForm::MyForm::textBox1_Leave(System::Object^ sender, System::Ev
 {
     if (textBox_selected_report->Text->Length == 0) {
         textBox_selected_report->Text = placeholderText_for_report;
-        textBox_selected_report->ForeColor = System::Drawing::Color::LightGray; // Цвет подсказки
+        textBox_selected_report->ForeColor = System::Drawing::Color::LightGray; 
         return;
     }
 }
@@ -111,16 +107,12 @@ System::Void SitaForm::MyForm::button5_Click(System::Object^ sender, System::Eve
 {
     try
     {
-        // Установка режима обертки текста для ячеек
         dataGridView2_reports->DefaultCellStyle->WrapMode = DataGridViewTriState::True;
 
-        // Установка автоматической подгонки высоты строк
         dataGridView2_reports->AutoSizeRowsMode = DataGridViewAutoSizeRowsMode::AllCells;
-        // Автоматическая подгонка ширины столбцов
         dataGridView2_reports->AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode::AllCells;
 
         std::string idReports = ConvertString(this->textBox_selected_report->Text);
-        // Создание SQL-запроса для получения всех клиентов
         std::string selectQuery = "SELECT * FROM sita.reports where idReports = " + idReports + ";";
         if (!validation_digits(idReports))
         {
@@ -132,10 +124,8 @@ System::Void SitaForm::MyForm::button5_Click(System::Object^ sender, System::Eve
         res = stmt->executeQuery(selectQuery);
 
 
-        // Создаем DataTable для хранения данных
         System::Data::DataTable^ dataTable4 = gcnew System::Data::DataTable();
 
-        // Заполняем DataTable данными из ResultSet
       
         dataTable4->Columns->Add("OrderID", int::typeid);
         dataTable4->Columns->Add("ProblemDescription", String::typeid);
@@ -155,11 +145,34 @@ System::Void SitaForm::MyForm::button5_Click(System::Object^ sender, System::Eve
             dataTable4->Rows->Add(OrderID, gcnew String(ProblemDescription.c_str()), gcnew String(Recommendations.c_str()));
         }
 
-        // Устанавливаем DataTable как источник данных для DataGridView
         this->dataGridView2_reports->DataSource = dataTable4;
     }
     catch (sql::SQLException& e)
     {
         MessageBox::Show(gcnew String(e.what()), "SQL Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
+    }
+}
+
+System::Void SitaForm::MyForm::button6_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    std::string idReport = ConvertString(this->textBox_selected_report->Text);
+    std::cout << "id " + idReport << std::endl;
+    std::string selectQuery = "SELECT * FROM sita.reports where idReports = " + idReport + ";";
+    if (!validation_digits(idReport))
+    {
+        this->textBox_selected_report->Text = "Error";
+        return;
+    }
+    //stmt->execute("SET NAMES 'cp1251'");
+    stmt = con->createStatement();
+    res = stmt->executeQuery(selectQuery);
+    if (!(res->next()))
+    {
+        this->label_for_reports->Text = "Такого заказа не существует";
+    }
+    else
+    {
+        stmt->executeUpdate("DELETE FROM `sita`.`reports` WHERE (`OrderID` = '" + idReport + "');");
+        this->label_for_reports->Text = "Отчёт удалён";
     }
 }
