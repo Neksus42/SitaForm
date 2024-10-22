@@ -7,6 +7,7 @@ using namespace System::Text;
 System::Void SitaForm::MyForm::button4_Click_1(System::Object^ sender, System::EventArgs^ e)
 {
     std::string idOrder = ConvertString(this->textBox_order_forreport->Text);
+    std::string CategoryProblem = ConvertString(this->comboBox_for_category->Text);
     std::cout << "id " + idOrder << std::endl;
     std::string selectQuery = "SELECT * FROM sita.orders where OrderID = " + idOrder + ";";
     if (!validation_digits(idOrder))
@@ -17,6 +18,11 @@ System::Void SitaForm::MyForm::button4_Click_1(System::Object^ sender, System::E
     if (idOrder == "")
     {
         this->label_for_reports->Text = "Введите ID заказа";
+        return;
+    }
+    if (CategoryProblem == "")
+    {
+        this->label_for_reports->Text = "Выберите категорию проблемы";
         return;
     }
     //stmt->execute("SET NAMES 'cp1251'");
@@ -30,9 +36,10 @@ System::Void SitaForm::MyForm::button4_Click_1(System::Object^ sender, System::E
     {
         std::string problem = ConvertString(this->richTextBox1_for_problem->Text);
         std::string recommend = ConvertString(this->richTextBox1_for_recommendtaion->Text);
-        std::string forquery = "INSERT INTO `sita`.`reports` (`OrderID`, `ProblemDescription`, `Recommendations`) VALUES ('"+idOrder+"', '"+problem+"', '"+recommend+"');";
+        std::string forquery = "INSERT INTO `sita`.`reports` (`OrderID`, `ProblemDescription`, `Recommendations`,`Problem_Category`) VALUES ('"+idOrder+"', '"+problem+"', '"+recommend+"','" + CategoryProblem + "');";
         stmt = con->createStatement();
         stmt->executeUpdate(forquery);
+        this->label_for_reports->Text = "Отчёт успешно добавлен";
     }
 }
 
@@ -130,6 +137,8 @@ System::Void SitaForm::MyForm::button5_Click(System::Object^ sender, System::Eve
         dataTable4->Columns->Add("OrderID", int::typeid);
         dataTable4->Columns->Add("ProblemDescription", String::typeid);
         dataTable4->Columns->Add("Recommendations", String::typeid);
+        dataTable4->Columns->Add("Problem_Category", String::typeid);
+
         
         while (res->next())
         {
@@ -137,12 +146,13 @@ System::Void SitaForm::MyForm::button5_Click(System::Object^ sender, System::Eve
             int OrderID = res->getInt("OrderID");
             std::string ProblemDescription = res->getString("ProblemDescription");
             std::string Recommendations = res->getString("Recommendations");
+            std::string Problem = res->getString("Problem_Category");
 
 
 
             std::cerr << "id" + std::to_string(OrderID) << std::endl;
 
-            dataTable4->Rows->Add(OrderID, gcnew String(ProblemDescription.c_str()), gcnew String(Recommendations.c_str()));
+            dataTable4->Rows->Add(OrderID, gcnew String(ProblemDescription.c_str()), gcnew String(Recommendations.c_str()), gcnew String(Problem.c_str()));
         }
 
         this->dataGridView2_reports->DataSource = dataTable4;

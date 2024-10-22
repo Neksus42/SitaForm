@@ -25,6 +25,7 @@ namespace SitaForm {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace System::Windows::Forms::DataVisualization::Charting;
 
 	/// <summary>
 	/// Сводка для MyForm
@@ -75,6 +76,7 @@ namespace SitaForm {
 	private: System::Windows::Forms::TabPage^ tabPage3;
 	private: System::Windows::Forms::TabPage^ tabPage4;
 	private: System::Windows::Forms::TabPage^ tabPage5;
+	private: System::Windows::Forms::TabPage^ tabPage6;
 
 
 	private: System::Windows::Forms::TextBox^ ClientNameBox;
@@ -174,6 +176,10 @@ private: System::Windows::Forms::Button^ button_show_all_asign;
 private: System::Windows::Forms::DataGridView^ dataGridView_for_asign;
 private: System::Windows::Forms::Button^ button7;
 private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
+private: System::Windows::Forms::Label^ label28;
+private: System::Windows::Forms::ComboBox^ comboBox_for_category;
+private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
+private: System::Windows::Forms::Button^ button8;
 
 
 
@@ -216,6 +222,9 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 
 		void InitializeComponent(void)
 		{
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -274,6 +283,8 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->label8 = (gcnew System::Windows::Forms::Label());
 			this->label11 = (gcnew System::Windows::Forms::Label());
 			this->tabPage4 = (gcnew System::Windows::Forms::TabPage());
+			this->label28 = (gcnew System::Windows::Forms::Label());
+			this->comboBox_for_category = (gcnew System::Windows::Forms::ComboBox());
 			this->button6 = (gcnew System::Windows::Forms::Button());
 			this->button5 = (gcnew System::Windows::Forms::Button());
 			this->textBox_selected_report = (gcnew System::Windows::Forms::TextBox());
@@ -300,6 +311,9 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->label27 = (gcnew System::Windows::Forms::Label());
 			this->textBox_order_idemployee = (gcnew System::Windows::Forms::TextBox());
 			this->textBox_order_foridorder = (gcnew System::Windows::Forms::TextBox());
+			this->tabPage6 = (gcnew System::Windows::Forms::TabPage());
+			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
+			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -311,6 +325,8 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_reports))->BeginInit();
 			this->tabPage5->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_for_asign))->BeginInit();
+			this->tabPage6->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->BeginInit();
 			this->SuspendLayout();
 			// 
 			// tabControl1
@@ -320,6 +336,7 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->tabControl1->Controls->Add(this->tabPage3);
 			this->tabControl1->Controls->Add(this->tabPage4);
 			this->tabControl1->Controls->Add(this->tabPage5);
+			this->tabControl1->Controls->Add(this->tabPage6);
 			this->tabControl1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Arial", 14));
 			this->tabControl1->Location = System::Drawing::Point(0, 0);
@@ -967,6 +984,8 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			// 
 			// tabPage4
 			// 
+			this->tabPage4->Controls->Add(this->label28);
+			this->tabPage4->Controls->Add(this->comboBox_for_category);
 			this->tabPage4->Controls->Add(this->button6);
 			this->tabPage4->Controls->Add(this->button5);
 			this->tabPage4->Controls->Add(this->textBox_selected_report);
@@ -988,6 +1007,27 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->tabPage4->TabIndex = 3;
 			this->tabPage4->Text = L"Отчёты";
 			this->tabPage4->Click += gcnew System::EventHandler(this, &MyForm::tabPage4_Click);
+			// 
+			// label28
+			// 
+			this->label28->AutoSize = true;
+			this->label28->Location = System::Drawing::Point(1387, 36);
+			this->label28->Name = L"label28";
+			this->label28->Size = System::Drawing::Size(424, 47);
+			this->label28->TabIndex = 60;
+			this->label28->Text = L"Категория проблемы";
+			// 
+			// comboBox_for_category
+			// 
+			this->comboBox_for_category->FormattingEnabled = true;
+			this->comboBox_for_category->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
+				L"Ноутбук", L"ПК Системный блок", L"Телефон",
+					L"Другое"
+			});
+			this->comboBox_for_category->Location = System::Drawing::Point(1383, 101);
+			this->comboBox_for_category->Name = L"comboBox_for_category";
+			this->comboBox_for_category->Size = System::Drawing::Size(428, 55);
+			this->comboBox_for_category->TabIndex = 59;
 			// 
 			// button6
 			// 
@@ -1131,6 +1171,7 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->textBox_order_forreport->Name = L"textBox_order_forreport";
 			this->textBox_order_forreport->Size = System::Drawing::Size(370, 56);
 			this->textBox_order_forreport->TabIndex = 40;
+			this->textBox_order_forreport->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox_order_forreport_TextChanged);
 			// 
 			// label_23
 			// 
@@ -1277,6 +1318,42 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->textBox_order_foridorder->Size = System::Drawing::Size(396, 56);
 			this->textBox_order_foridorder->TabIndex = 13;
 			// 
+			// tabPage6
+			// 
+			this->tabPage6->Controls->Add(this->chart1);
+			this->tabPage6->Controls->Add(this->button8);
+			this->tabPage6->Location = System::Drawing::Point(10, 65);
+			this->tabPage6->Name = L"tabPage6";
+			this->tabPage6->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage6->TabIndex = 5;
+			this->tabPage6->Text = L"Статистика";
+			// 
+			// chart1
+			// 
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
+			this->chart1->Location = System::Drawing::Point(489, 199);
+			this->chart1->Name = L"chart1";
+			series1->ChartArea = L"ChartArea1";
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
+			this->chart1->Size = System::Drawing::Size(1203, 633);
+			this->chart1->TabIndex = 1;
+			this->chart1->Text = L"chart1";
+			// 
+			// button8
+			// 
+			this->button8->Location = System::Drawing::Point(682, 45);
+			this->button8->Name = L"button8";
+			this->button8->Size = System::Drawing::Size(784, 65);
+			this->button8->TabIndex = 0;
+			this->button8->Text = L"Отобразить диаграмму категорий";
+			this->button8->UseVisualStyleBackColor = true;
+			this->button8->Click += gcnew System::EventHandler(this, &MyForm::button8_Click);
+			// 
 			// MyForm
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(216, 216);
@@ -1302,6 +1379,8 @@ private: System::Windows::Forms::TextBox^ textBox_for_selected_asign;
 			this->tabPage5->ResumeLayout(false);
 			this->tabPage5->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_for_asign))->EndInit();
+			this->tabPage6->ResumeLayout(false);
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->chart1))->EndInit();
 			this->ResumeLayout(false);
 
 		}
@@ -1405,6 +1484,10 @@ private: System::Void textBox_for_selected_asign_Enter(System::Object^ sender, S
 private: System::Void textBox_for_selected_asign_Leave(System::Object^ sender, System::EventArgs^ e);
 private: System::Void dataGridView_for_asign_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 private: System::Void button7_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void textBox_order_forreport_TextChanged(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e);
+
 };
 
 
