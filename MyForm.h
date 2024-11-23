@@ -78,6 +78,10 @@ namespace SitaForm {
 	private: System::Windows::Forms::TabPage^ tabPage5;
 	private: System::Windows::Forms::TabPage^ tabPage6;
 
+	private: System::Windows::Forms::TabPage^ tabPage7;
+	private: System::Windows::Forms::TabPage^ tabPage8;
+
+
 
 	private: System::Windows::Forms::TextBox^ ClientNameBox;
 	private: System::Windows::Forms::TextBox^ ClientPhoneBox;
@@ -180,6 +184,32 @@ private: System::Windows::Forms::Label^ label28;
 private: System::Windows::Forms::ComboBox^ comboBox_for_category;
 private: System::Windows::Forms::DataVisualization::Charting::Chart^ chart1;
 private: System::Windows::Forms::Button^ button8;
+private: System::Windows::Forms::ContextMenuStrip^ contextMenuStrip1;
+private: System::Windows::Forms::Label^ label_department_delete;
+
+
+
+private: System::Windows::Forms::Button^ button_to_delete_department;
+
+private: System::Windows::Forms::Label^ label31;
+private: System::Windows::Forms::TextBox^ textBox_for_deleting_Department;
+
+private: System::Windows::Forms::Label^ label32;
+private: System::Windows::Forms::Button^ button_show_all_departmnents;
+private: System::Windows::Forms::DataGridView^ dataGridView_Departments;
+private: System::Windows::Forms::Label^ label_department_add;
+
+
+
+private: System::Windows::Forms::Button^ button_add_department;
+
+private: System::Windows::Forms::Label^ label34;
+
+private: System::Windows::Forms::Label^ label36;
+private: System::Windows::Forms::TextBox^ textbox_foraddDepartment;
+
+
+private: System::ComponentModel::IContainer^ components;
 
 
 
@@ -194,7 +224,7 @@ private: System::Windows::Forms::Button^ button8;
 		/// <summary>
 		/// Обязательная переменная конструктора.
 		/// </summary>
-		System::ComponentModel::Container ^components;
+
 
 #pragma region Windows Form Designer generated code
 		/// <summary>
@@ -222,6 +252,7 @@ private: System::Windows::Forms::Button^ button8;
 
 		void InitializeComponent(void)
 		{
+			this->components = (gcnew System::ComponentModel::Container());
 			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
 			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
 			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
@@ -241,6 +272,19 @@ private: System::Windows::Forms::Button^ button8;
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->ClientNameBox = (gcnew System::Windows::Forms::TextBox());
 			this->ClientPhoneBox = (gcnew System::Windows::Forms::TextBox());
+			this->tabPage7 = (gcnew System::Windows::Forms::TabPage());
+			this->label_department_delete = (gcnew System::Windows::Forms::Label());
+			this->button_to_delete_department = (gcnew System::Windows::Forms::Button());
+			this->label31 = (gcnew System::Windows::Forms::Label());
+			this->textBox_for_deleting_Department = (gcnew System::Windows::Forms::TextBox());
+			this->label32 = (gcnew System::Windows::Forms::Label());
+			this->button_show_all_departmnents = (gcnew System::Windows::Forms::Button());
+			this->dataGridView_Departments = (gcnew System::Windows::Forms::DataGridView());
+			this->label_department_add = (gcnew System::Windows::Forms::Label());
+			this->button_add_department = (gcnew System::Windows::Forms::Button());
+			this->label34 = (gcnew System::Windows::Forms::Label());
+			this->label36 = (gcnew System::Windows::Forms::Label());
+			this->textbox_foraddDepartment = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage2 = (gcnew System::Windows::Forms::TabPage());
 			this->label15 = (gcnew System::Windows::Forms::Label());
 			this->Employee_Post_Box = (gcnew System::Windows::Forms::TextBox());
@@ -314,9 +358,12 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage6 = (gcnew System::Windows::Forms::TabPage());
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->button8 = (gcnew System::Windows::Forms::Button());
+			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
+			this->tabPage7->SuspendLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Departments))->BeginInit();
 			this->tabPage2->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_employee))->BeginInit();
 			this->tabPage3->SuspendLayout();
@@ -332,6 +379,7 @@ private: System::Windows::Forms::Button^ button8;
 			// tabControl1
 			// 
 			this->tabControl1->Controls->Add(this->tabPage1);
+			this->tabControl1->Controls->Add(this->tabPage7);
 			this->tabControl1->Controls->Add(this->tabPage2);
 			this->tabControl1->Controls->Add(this->tabPage3);
 			this->tabControl1->Controls->Add(this->tabPage4);
@@ -340,10 +388,9 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabControl1->Dock = System::Windows::Forms::DockStyle::Fill;
 			this->tabControl1->Font = (gcnew System::Drawing::Font(L"Arial", 14));
 			this->tabControl1->Location = System::Drawing::Point(0, 0);
-			this->tabControl1->Margin = System::Windows::Forms::Padding(7);
 			this->tabControl1->Name = L"tabControl1";
 			this->tabControl1->SelectedIndex = 0;
-			this->tabControl1->Size = System::Drawing::Size(2095, 1274);
+			this->tabControl1->Size = System::Drawing::Size(931, 566);
 			this->tabControl1->TabIndex = 5;
 			// 
 			// tabPage1
@@ -362,11 +409,10 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage1->Controls->Add(this->label1);
 			this->tabPage1->Controls->Add(this->ClientNameBox);
 			this->tabPage1->Controls->Add(this->ClientPhoneBox);
-			this->tabPage1->Location = System::Drawing::Point(10, 65);
-			this->tabPage1->Margin = System::Windows::Forms::Padding(7);
+			this->tabPage1->Location = System::Drawing::Point(4, 31);
 			this->tabPage1->Name = L"tabPage1";
-			this->tabPage1->Padding = System::Windows::Forms::Padding(7);
-			this->tabPage1->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage1->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage1->Size = System::Drawing::Size(923, 531);
 			this->tabPage1->TabIndex = 0;
 			this->tabPage1->Text = L"Клиенты";
 			this->tabPage1->UseVisualStyleBackColor = true;
@@ -375,19 +421,17 @@ private: System::Windows::Forms::Button^ button8;
 			// label7
 			// 
 			this->label7->AutoSize = true;
-			this->label7->Location = System::Drawing::Point(1552, 406);
-			this->label7->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label7->Location = System::Drawing::Point(690, 180);
 			this->label7->Name = L"label7";
-			this->label7->Size = System::Drawing::Size(285, 47);
+			this->label7->Size = System::Drawing::Size(132, 22);
 			this->label7->TabIndex = 19;
 			this->label7->Text = L"Отображение";
 			// 
 			// button3
 			// 
-			this->button3->Location = System::Drawing::Point(1526, 228);
-			this->button3->Margin = System::Windows::Forms::Padding(7);
+			this->button3->Location = System::Drawing::Point(678, 101);
 			this->button3->Name = L"button3";
-			this->button3->Size = System::Drawing::Size(408, 71);
+			this->button3->Size = System::Drawing::Size(181, 32);
 			this->button3->TabIndex = 18;
 			this->button3->Text = L"Удалить клиента";
 			this->button3->UseVisualStyleBackColor = true;
@@ -396,37 +440,34 @@ private: System::Windows::Forms::Button^ button8;
 			// label6
 			// 
 			this->label6->AutoSize = true;
-			this->label6->Location = System::Drawing::Point(1344, 98);
-			this->label6->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label6->Location = System::Drawing::Point(597, 44);
 			this->label6->Name = L"label6";
-			this->label6->Size = System::Drawing::Size(228, 47);
+			this->label6->Size = System::Drawing::Size(102, 22);
 			this->label6->TabIndex = 17;
 			this->label6->Text = L"ID клиента";
 			// 
 			// ClientID
 			// 
-			this->ClientID->Location = System::Drawing::Point(1640, 96);
-			this->ClientID->Margin = System::Windows::Forms::Padding(7);
+			this->ClientID->Location = System::Drawing::Point(729, 43);
 			this->ClientID->Name = L"ClientID";
-			this->ClientID->Size = System::Drawing::Size(370, 56);
+			this->ClientID->Size = System::Drawing::Size(167, 29);
 			this->ClientID->TabIndex = 16;
 			// 
 			// label5
 			// 
 			this->label5->AutoSize = true;
-			this->label5->Location = System::Drawing::Point(1517, 7);
-			this->label5->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label5->Location = System::Drawing::Point(674, 3);
 			this->label5->Name = L"label5";
-			this->label5->Size = System::Drawing::Size(375, 47);
+			this->label5->Size = System::Drawing::Size(166, 22);
 			this->label5->TabIndex = 15;
 			this->label5->Text = L"Удаление клиента";
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(166, 319);
-			this->button2->Margin = System::Windows::Forms::Padding(2);
+			this->button2->Location = System::Drawing::Point(74, 142);
+			this->button2->Margin = System::Windows::Forms::Padding(1);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(485, 74);
+			this->button2->Size = System::Drawing::Size(216, 33);
 			this->button2->TabIndex = 14;
 			this->button2->Text = L"Вывести всех клиентов";
 			this->button2->UseVisualStyleBackColor = true;
@@ -440,31 +481,29 @@ private: System::Windows::Forms::Button^ button8;
 			this->dataGridView1->AllowUserToResizeRows = false;
 			this->dataGridView1->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView1->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView1->Location = System::Drawing::Point(166, 605);
-			this->dataGridView1->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView1->Location = System::Drawing::Point(74, 269);
+			this->dataGridView1->Margin = System::Windows::Forms::Padding(1);
 			this->dataGridView1->Name = L"dataGridView1";
 			this->dataGridView1->ReadOnly = true;
 			this->dataGridView1->RowHeadersWidth = 92;
 			this->dataGridView1->RowTemplate->Height = 37;
-			this->dataGridView1->Size = System::Drawing::Size(1769, 551);
+			this->dataGridView1->Size = System::Drawing::Size(786, 245);
 			this->dataGridView1->TabIndex = 6;
 			// 
 			// label4
 			// 
 			this->label4->AutoSize = true;
-			this->label4->Location = System::Drawing::Point(7, 406);
-			this->label4->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label4->Location = System::Drawing::Point(3, 180);
 			this->label4->Name = L"label4";
-			this->label4->Size = System::Drawing::Size(285, 47);
+			this->label4->Size = System::Drawing::Size(132, 22);
 			this->label4->TabIndex = 13;
 			this->label4->Text = L"Отображение";
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(166, 228);
-			this->button1->Margin = System::Windows::Forms::Padding(7);
+			this->button1->Location = System::Drawing::Point(74, 101);
 			this->button1->Name = L"button1";
-			this->button1->Size = System::Drawing::Size(485, 71);
+			this->button1->Size = System::Drawing::Size(216, 32);
 			this->button1->TabIndex = 12;
 			this->button1->Text = L"Добавить клиента";
 			this->button1->UseVisualStyleBackColor = true;
@@ -473,49 +512,183 @@ private: System::Windows::Forms::Button^ button8;
 			// label3
 			// 
 			this->label3->AutoSize = true;
-			this->label3->Location = System::Drawing::Point(201, 7);
-			this->label3->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label3->Location = System::Drawing::Point(89, 3);
 			this->label3->Name = L"label3";
-			this->label3->Size = System::Drawing::Size(421, 47);
+			this->label3->Size = System::Drawing::Size(189, 22);
 			this->label3->TabIndex = 11;
 			this->label3->Text = L"Добавление клиента";
 			// 
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(40, 152);
-			this->label2->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label2->Location = System::Drawing::Point(18, 68);
 			this->label2->Name = L"label2";
-			this->label2->Size = System::Drawing::Size(361, 47);
+			this->label2->Size = System::Drawing::Size(161, 22);
 			this->label2->TabIndex = 10;
 			this->label2->Text = L"Телефон клиента";
 			// 
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(89, 74);
-			this->label1->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label1->Location = System::Drawing::Point(40, 33);
 			this->label1->Name = L"label1";
-			this->label1->Size = System::Drawing::Size(268, 47);
+			this->label1->Size = System::Drawing::Size(119, 22);
 			this->label1->TabIndex = 9;
 			this->label1->Text = L"Имя клиента";
 			// 
 			// ClientNameBox
 			// 
-			this->ClientNameBox->Location = System::Drawing::Point(415, 71);
-			this->ClientNameBox->Margin = System::Windows::Forms::Padding(7);
+			this->ClientNameBox->Location = System::Drawing::Point(184, 32);
 			this->ClientNameBox->Name = L"ClientNameBox";
-			this->ClientNameBox->Size = System::Drawing::Size(370, 56);
+			this->ClientNameBox->Size = System::Drawing::Size(167, 29);
 			this->ClientNameBox->TabIndex = 6;
 			this->ClientNameBox->Text = L" ";
 			// 
 			// ClientPhoneBox
 			// 
-			this->ClientPhoneBox->Location = System::Drawing::Point(415, 149);
-			this->ClientPhoneBox->Margin = System::Windows::Forms::Padding(7);
+			this->ClientPhoneBox->Location = System::Drawing::Point(184, 66);
 			this->ClientPhoneBox->Name = L"ClientPhoneBox";
-			this->ClientPhoneBox->Size = System::Drawing::Size(370, 56);
+			this->ClientPhoneBox->Size = System::Drawing::Size(167, 29);
 			this->ClientPhoneBox->TabIndex = 7;
+			// 
+			// tabPage7
+			// 
+			this->tabPage7->Controls->Add(this->label_department_delete);
+			this->tabPage7->Controls->Add(this->button_to_delete_department);
+			this->tabPage7->Controls->Add(this->label31);
+			this->tabPage7->Controls->Add(this->textBox_for_deleting_Department);
+			this->tabPage7->Controls->Add(this->label32);
+			this->tabPage7->Controls->Add(this->button_show_all_departmnents);
+			this->tabPage7->Controls->Add(this->dataGridView_Departments);
+			this->tabPage7->Controls->Add(this->label_department_add);
+			this->tabPage7->Controls->Add(this->button_add_department);
+			this->tabPage7->Controls->Add(this->label34);
+			this->tabPage7->Controls->Add(this->label36);
+			this->tabPage7->Controls->Add(this->textbox_foraddDepartment);
+			this->tabPage7->Location = System::Drawing::Point(4, 31);
+			this->tabPage7->Margin = System::Windows::Forms::Padding(1);
+			this->tabPage7->Name = L"tabPage7";
+			this->tabPage7->Size = System::Drawing::Size(923, 531);
+			this->tabPage7->TabIndex = 6;
+			this->tabPage7->Text = L"Отделы";
+			// 
+			// label_department_delete
+			// 
+			this->label_department_delete->AutoSize = true;
+			this->label_department_delete->Location = System::Drawing::Point(696, 169);
+			this->label_department_delete->Name = L"label_department_delete";
+			this->label_department_delete->Size = System::Drawing::Size(148, 22);
+			this->label_department_delete->TabIndex = 49;
+			this->label_department_delete->Text = L"Отображение р";
+			// 
+			// button_to_delete_department
+			// 
+			this->button_to_delete_department->Location = System::Drawing::Point(690, 90);
+			this->button_to_delete_department->Name = L"button_to_delete_department";
+			this->button_to_delete_department->Size = System::Drawing::Size(181, 32);
+			this->button_to_delete_department->TabIndex = 48;
+			this->button_to_delete_department->Text = L"Удалить работника";
+			this->button_to_delete_department->UseVisualStyleBackColor = true;
+			this->button_to_delete_department->Click += gcnew System::EventHandler(this, &MyForm::button_to_delete_department_Click);
+			// 
+			// label31
+			// 
+			this->label31->AutoSize = true;
+			this->label31->Location = System::Drawing::Point(609, 56);
+			this->label31->Name = L"label31";
+			this->label31->Size = System::Drawing::Size(94, 22);
+			this->label31->TabIndex = 47;
+			this->label31->Text = L"ID отдела";
+			// 
+			// textBox_for_deleting_Department
+			// 
+			this->textBox_for_deleting_Department->Location = System::Drawing::Point(741, 54);
+			this->textBox_for_deleting_Department->Name = L"textBox_for_deleting_Department";
+			this->textBox_for_deleting_Department->Size = System::Drawing::Size(167, 29);
+			this->textBox_for_deleting_Department->TabIndex = 46;
+			// 
+			// label32
+			// 
+			this->label32->AutoSize = true;
+			this->label32->Location = System::Drawing::Point(686, 15);
+			this->label32->Name = L"label32";
+			this->label32->Size = System::Drawing::Size(158, 22);
+			this->label32->TabIndex = 45;
+			this->label32->Text = L"Удаление отдела";
+			// 
+			// button_show_all_departmnents
+			// 
+			this->button_show_all_departmnents->Location = System::Drawing::Point(91, 131);
+			this->button_show_all_departmnents->Margin = System::Windows::Forms::Padding(1);
+			this->button_show_all_departmnents->Name = L"button_show_all_departmnents";
+			this->button_show_all_departmnents->Size = System::Drawing::Size(237, 33);
+			this->button_show_all_departmnents->TabIndex = 44;
+			this->button_show_all_departmnents->Text = L"Вывести все отделы";
+			this->button_show_all_departmnents->UseVisualStyleBackColor = true;
+			this->button_show_all_departmnents->Click += gcnew System::EventHandler(this, &MyForm::button_show_all_departmnents_Click);
+			// 
+			// dataGridView_Departments
+			// 
+			this->dataGridView_Departments->AllowUserToAddRows = false;
+			this->dataGridView_Departments->AllowUserToDeleteRows = false;
+			this->dataGridView_Departments->AllowUserToResizeColumns = false;
+			this->dataGridView_Departments->AllowUserToResizeRows = false;
+			this->dataGridView_Departments->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
+			this->dataGridView_Departments->BackgroundColor = System::Drawing::Color::Bisque;
+			this->dataGridView_Departments->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
+			this->dataGridView_Departments->Location = System::Drawing::Point(60, 335);
+			this->dataGridView_Departments->Margin = System::Windows::Forms::Padding(1);
+			this->dataGridView_Departments->Name = L"dataGridView_Departments";
+			this->dataGridView_Departments->ReadOnly = true;
+			this->dataGridView_Departments->RowHeadersWidth = 92;
+			this->dataGridView_Departments->RowTemplate->Height = 37;
+			this->dataGridView_Departments->Size = System::Drawing::Size(821, 180);
+			this->dataGridView_Departments->TabIndex = 36;
+			// 
+			// label_department_add
+			// 
+			this->label_department_add->AutoSize = true;
+			this->label_department_add->Location = System::Drawing::Point(20, 169);
+			this->label_department_add->Name = L"label_department_add";
+			this->label_department_add->Size = System::Drawing::Size(148, 22);
+			this->label_department_add->TabIndex = 43;
+			this->label_department_add->Text = L"Отображение р";
+			// 
+			// button_add_department
+			// 
+			this->button_add_department->Location = System::Drawing::Point(91, 90);
+			this->button_add_department->Name = L"button_add_department";
+			this->button_add_department->Size = System::Drawing::Size(237, 32);
+			this->button_add_department->TabIndex = 42;
+			this->button_add_department->Text = L"Добавить отдел";
+			this->button_add_department->UseVisualStyleBackColor = true;
+			this->button_add_department->Click += gcnew System::EventHandler(this, &MyForm::button_add_department_Click);
+			// 
+			// label34
+			// 
+			this->label34->AutoSize = true;
+			this->label34->Location = System::Drawing::Point(107, 15);
+			this->label34->Name = L"label34";
+			this->label34->Size = System::Drawing::Size(181, 22);
+			this->label34->TabIndex = 41;
+			this->label34->Text = L"Добавление отдела";
+			this->label34->Click += gcnew System::EventHandler(this, &MyForm::label34_Click);
+			// 
+			// label36
+			// 
+			this->label36->AutoSize = true;
+			this->label36->Location = System::Drawing::Point(36, 44);
+			this->label36->Name = L"label36";
+			this->label36->Size = System::Drawing::Size(157, 22);
+			this->label36->TabIndex = 39;
+			this->label36->Text = L"Название отдела";
+			// 
+			// textbox_foraddDepartment
+			// 
+			this->textbox_foraddDepartment->Location = System::Drawing::Point(208, 44);
+			this->textbox_foraddDepartment->Name = L"textbox_foraddDepartment";
+			this->textbox_foraddDepartment->Size = System::Drawing::Size(167, 29);
+			this->textbox_foraddDepartment->TabIndex = 37;
 			// 
 			// tabPage2
 			// 
@@ -535,11 +708,10 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage2->Controls->Add(this->label14);
 			this->tabPage2->Controls->Add(this->Employee_name_Box);
 			this->tabPage2->Controls->Add(this->Employee_phone_Box);
-			this->tabPage2->Location = System::Drawing::Point(10, 65);
-			this->tabPage2->Margin = System::Windows::Forms::Padding(7);
+			this->tabPage2->Location = System::Drawing::Point(4, 31);
 			this->tabPage2->Name = L"tabPage2";
-			this->tabPage2->Padding = System::Windows::Forms::Padding(7);
-			this->tabPage2->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage2->Padding = System::Windows::Forms::Padding(3);
+			this->tabPage2->Size = System::Drawing::Size(923, 531);
 			this->tabPage2->TabIndex = 1;
 			this->tabPage2->Text = L"Работники";
 			this->tabPage2->UseVisualStyleBackColor = true;
@@ -547,37 +719,33 @@ private: System::Windows::Forms::Button^ button8;
 			// label15
 			// 
 			this->label15->AutoSize = true;
-			this->label15->Location = System::Drawing::Point(100, 232);
-			this->label15->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label15->Location = System::Drawing::Point(44, 103);
 			this->label15->Name = L"label15";
-			this->label15->Size = System::Drawing::Size(231, 47);
+			this->label15->Size = System::Drawing::Size(108, 22);
 			this->label15->TabIndex = 35;
 			this->label15->Text = L"Должность";
 			// 
 			// Employee_Post_Box
 			// 
-			this->Employee_Post_Box->Location = System::Drawing::Point(443, 232);
-			this->Employee_Post_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Employee_Post_Box->Location = System::Drawing::Point(197, 103);
 			this->Employee_Post_Box->Name = L"Employee_Post_Box";
-			this->Employee_Post_Box->Size = System::Drawing::Size(370, 56);
+			this->Employee_Post_Box->Size = System::Drawing::Size(167, 29);
 			this->Employee_Post_Box->TabIndex = 34;
 			// 
 			// label_del_employee
 			// 
 			this->label_del_employee->AutoSize = true;
-			this->label_del_employee->Location = System::Drawing::Point(1552, 482);
-			this->label_del_employee->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label_del_employee->Location = System::Drawing::Point(690, 214);
 			this->label_del_employee->Name = L"label_del_employee";
-			this->label_del_employee->Size = System::Drawing::Size(320, 47);
+			this->label_del_employee->Size = System::Drawing::Size(148, 22);
 			this->label_del_employee->TabIndex = 33;
 			this->label_del_employee->Text = L"Отображение р";
 			// 
 			// button_delete_employee
 			// 
-			this->button_delete_employee->Location = System::Drawing::Point(1526, 303);
-			this->button_delete_employee->Margin = System::Windows::Forms::Padding(7);
+			this->button_delete_employee->Location = System::Drawing::Point(678, 135);
 			this->button_delete_employee->Name = L"button_delete_employee";
-			this->button_delete_employee->Size = System::Drawing::Size(408, 71);
+			this->button_delete_employee->Size = System::Drawing::Size(181, 32);
 			this->button_delete_employee->TabIndex = 32;
 			this->button_delete_employee->Text = L"Удалить работника";
 			this->button_delete_employee->UseVisualStyleBackColor = true;
@@ -586,37 +754,34 @@ private: System::Windows::Forms::Button^ button8;
 			// label9
 			// 
 			this->label9->AutoSize = true;
-			this->label9->Location = System::Drawing::Point(1346, 103);
-			this->label9->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label9->Location = System::Drawing::Point(598, 46);
 			this->label9->Name = L"label9";
-			this->label9->Size = System::Drawing::Size(273, 47);
+			this->label9->Size = System::Drawing::Size(124, 22);
 			this->label9->TabIndex = 31;
 			this->label9->Text = L"ID работника";
 			// 
 			// Employee_ID_Box
 			// 
-			this->Employee_ID_Box->Location = System::Drawing::Point(1643, 98);
-			this->Employee_ID_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Employee_ID_Box->Location = System::Drawing::Point(730, 44);
 			this->Employee_ID_Box->Name = L"Employee_ID_Box";
-			this->Employee_ID_Box->Size = System::Drawing::Size(370, 56);
+			this->Employee_ID_Box->Size = System::Drawing::Size(167, 29);
 			this->Employee_ID_Box->TabIndex = 30;
 			// 
 			// label10
 			// 
 			this->label10->AutoSize = true;
-			this->label10->Location = System::Drawing::Point(1519, 11);
-			this->label10->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label10->Location = System::Drawing::Point(675, 5);
 			this->label10->Name = L"label10";
-			this->label10->Size = System::Drawing::Size(420, 47);
+			this->label10->Size = System::Drawing::Size(188, 22);
 			this->label10->TabIndex = 29;
 			this->label10->Text = L"Удаление работника";
 			// 
 			// button_showall_employee
 			// 
-			this->button_showall_employee->Location = System::Drawing::Point(180, 395);
-			this->button_showall_employee->Margin = System::Windows::Forms::Padding(2);
+			this->button_showall_employee->Location = System::Drawing::Point(80, 176);
+			this->button_showall_employee->Margin = System::Windows::Forms::Padding(1);
 			this->button_showall_employee->Name = L"button_showall_employee";
-			this->button_showall_employee->Size = System::Drawing::Size(534, 74);
+			this->button_showall_employee->Size = System::Drawing::Size(237, 33);
 			this->button_showall_employee->TabIndex = 28;
 			this->button_showall_employee->Text = L"Вывести всех работников";
 			this->button_showall_employee->UseVisualStyleBackColor = true;
@@ -631,31 +796,29 @@ private: System::Windows::Forms::Button^ button8;
 			this->dataGridView2_employee->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView2_employee->BackgroundColor = System::Drawing::Color::Bisque;
 			this->dataGridView2_employee->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2_employee->Location = System::Drawing::Point(110, 732);
-			this->dataGridView2_employee->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView2_employee->Location = System::Drawing::Point(49, 325);
+			this->dataGridView2_employee->Margin = System::Windows::Forms::Padding(1);
 			this->dataGridView2_employee->Name = L"dataGridView2_employee";
 			this->dataGridView2_employee->ReadOnly = true;
 			this->dataGridView2_employee->RowHeadersWidth = 92;
 			this->dataGridView2_employee->RowTemplate->Height = 37;
-			this->dataGridView2_employee->Size = System::Drawing::Size(1848, 404);
+			this->dataGridView2_employee->Size = System::Drawing::Size(821, 180);
 			this->dataGridView2_employee->TabIndex = 20;
 			// 
 			// label_add_employee
 			// 
 			this->label_add_employee->AutoSize = true;
-			this->label_add_employee->Location = System::Drawing::Point(21, 482);
-			this->label_add_employee->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label_add_employee->Location = System::Drawing::Point(9, 214);
 			this->label_add_employee->Name = L"label_add_employee";
-			this->label_add_employee->Size = System::Drawing::Size(320, 47);
+			this->label_add_employee->Size = System::Drawing::Size(148, 22);
 			this->label_add_employee->TabIndex = 27;
 			this->label_add_employee->Text = L"Отображение р";
 			// 
 			// button_add_employee
 			// 
-			this->button_add_employee->Location = System::Drawing::Point(180, 303);
-			this->button_add_employee->Margin = System::Windows::Forms::Padding(7);
+			this->button_add_employee->Location = System::Drawing::Point(80, 135);
 			this->button_add_employee->Name = L"button_add_employee";
-			this->button_add_employee->Size = System::Drawing::Size(534, 71);
+			this->button_add_employee->Size = System::Drawing::Size(237, 32);
 			this->button_add_employee->TabIndex = 26;
 			this->button_add_employee->Text = L"Добавить работника";
 			this->button_add_employee->UseVisualStyleBackColor = true;
@@ -664,48 +827,43 @@ private: System::Windows::Forms::Button^ button8;
 			// label12
 			// 
 			this->label12->AutoSize = true;
-			this->label12->Location = System::Drawing::Point(217, 11);
-			this->label12->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label12->Location = System::Drawing::Point(96, 5);
 			this->label12->Name = L"label12";
-			this->label12->Size = System::Drawing::Size(466, 47);
+			this->label12->Size = System::Drawing::Size(211, 22);
 			this->label12->TabIndex = 25;
 			this->label12->Text = L"Добавление работника";
 			// 
 			// label13
 			// 
 			this->label13->AutoSize = true;
-			this->label13->Location = System::Drawing::Point(7, 154);
-			this->label13->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label13->Location = System::Drawing::Point(3, 68);
 			this->label13->Name = L"label13";
-			this->label13->Size = System::Drawing::Size(406, 47);
+			this->label13->Size = System::Drawing::Size(183, 22);
 			this->label13->TabIndex = 24;
 			this->label13->Text = L"Телефон работника";
 			// 
 			// label14
 			// 
 			this->label14->AutoSize = true;
-			this->label14->Location = System::Drawing::Point(56, 76);
-			this->label14->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label14->Location = System::Drawing::Point(25, 34);
 			this->label14->Name = L"label14";
-			this->label14->Size = System::Drawing::Size(313, 47);
+			this->label14->Size = System::Drawing::Size(141, 22);
 			this->label14->TabIndex = 23;
 			this->label14->Text = L"Имя работника";
 			this->label14->Click += gcnew System::EventHandler(this, &MyForm::label14_Click);
 			// 
 			// Employee_name_Box
 			// 
-			this->Employee_name_Box->Location = System::Drawing::Point(443, 76);
-			this->Employee_name_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Employee_name_Box->Location = System::Drawing::Point(197, 34);
 			this->Employee_name_Box->Name = L"Employee_name_Box";
-			this->Employee_name_Box->Size = System::Drawing::Size(370, 56);
+			this->Employee_name_Box->Size = System::Drawing::Size(167, 29);
 			this->Employee_name_Box->TabIndex = 21;
 			// 
 			// Employee_phone_Box
 			// 
-			this->Employee_phone_Box->Location = System::Drawing::Point(443, 154);
-			this->Employee_phone_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Employee_phone_Box->Location = System::Drawing::Point(197, 68);
 			this->Employee_phone_Box->Name = L"Employee_phone_Box";
-			this->Employee_phone_Box->Size = System::Drawing::Size(370, 56);
+			this->Employee_phone_Box->Size = System::Drawing::Size(167, 29);
 			this->Employee_phone_Box->TabIndex = 22;
 			// 
 			// tabPage3
@@ -733,20 +891,19 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage3->Controls->Add(this->ID_Client_Box);
 			this->tabPage3->Controls->Add(this->label8);
 			this->tabPage3->Controls->Add(this->label11);
-			this->tabPage3->Location = System::Drawing::Point(10, 65);
-			this->tabPage3->Margin = System::Windows::Forms::Padding(2);
+			this->tabPage3->Location = System::Drawing::Point(4, 31);
+			this->tabPage3->Margin = System::Windows::Forms::Padding(1);
 			this->tabPage3->Name = L"tabPage3";
-			this->tabPage3->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage3->Size = System::Drawing::Size(923, 531);
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Заказы";
 			this->tabPage3->Click += gcnew System::EventHandler(this, &MyForm::tabPage3_Click);
 			// 
 			// button_delete_order
 			// 
-			this->button_delete_order->Location = System::Drawing::Point(670, 630);
-			this->button_delete_order->Margin = System::Windows::Forms::Padding(7);
+			this->button_delete_order->Location = System::Drawing::Point(298, 280);
 			this->button_delete_order->Name = L"button_delete_order";
-			this->button_delete_order->Size = System::Drawing::Size(415, 67);
+			this->button_delete_order->Size = System::Drawing::Size(184, 30);
 			this->button_delete_order->TabIndex = 57;
 			this->button_delete_order->Text = L"Удалить заказ";
 			this->button_delete_order->UseVisualStyleBackColor = true;
@@ -754,10 +911,9 @@ private: System::Windows::Forms::Button^ button8;
 			// 
 			// button_selected_order
 			// 
-			this->button_selected_order->Location = System::Drawing::Point(670, 549);
-			this->button_selected_order->Margin = System::Windows::Forms::Padding(7);
+			this->button_selected_order->Location = System::Drawing::Point(298, 244);
 			this->button_selected_order->Name = L"button_selected_order";
-			this->button_selected_order->Size = System::Drawing::Size(415, 67);
+			this->button_selected_order->Size = System::Drawing::Size(184, 30);
 			this->button_selected_order->TabIndex = 56;
 			this->button_selected_order->Text = L"Отобразить заказ";
 			this->button_selected_order->UseVisualStyleBackColor = true;
@@ -766,10 +922,9 @@ private: System::Windows::Forms::Button^ button8;
 			// textBox_forOrder
 			// 
 			this->textBox_forOrder->ForeColor = System::Drawing::Color::LightGray;
-			this->textBox_forOrder->Location = System::Drawing::Point(147, 551);
-			this->textBox_forOrder->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_forOrder->Location = System::Drawing::Point(65, 245);
 			this->textBox_forOrder->Name = L"textBox_forOrder";
-			this->textBox_forOrder->Size = System::Drawing::Size(436, 56);
+			this->textBox_forOrder->Size = System::Drawing::Size(196, 29);
 			this->textBox_forOrder->TabIndex = 55;
 			this->textBox_forOrder->Text = L"Введите ID заказа...";
 			this->textBox_forOrder->Enter += gcnew System::EventHandler(this, &MyForm::textBox_forOrder_Enter);
@@ -777,10 +932,9 @@ private: System::Windows::Forms::Button^ button8;
 			// 
 			// button_show_orders
 			// 
-			this->button_show_orders->Location = System::Drawing::Point(194, 337);
-			this->button_show_orders->Margin = System::Windows::Forms::Padding(7);
+			this->button_show_orders->Location = System::Drawing::Point(86, 150);
 			this->button_show_orders->Name = L"button_show_orders";
-			this->button_show_orders->Size = System::Drawing::Size(415, 67);
+			this->button_show_orders->Size = System::Drawing::Size(184, 30);
 			this->button_show_orders->TabIndex = 54;
 			this->button_show_orders->Text = L"Показать заказы";
 			this->button_show_orders->UseVisualStyleBackColor = true;
@@ -795,32 +949,30 @@ private: System::Windows::Forms::Button^ button8;
 			this->dataGridView2_Orders->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView2_Orders->BackgroundColor = System::Drawing::Color::Brown;
 			this->dataGridView2_Orders->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2_Orders->Location = System::Drawing::Point(147, 747);
-			this->dataGridView2_Orders->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView2_Orders->Location = System::Drawing::Point(65, 332);
+			this->dataGridView2_Orders->Margin = System::Windows::Forms::Padding(1);
 			this->dataGridView2_Orders->Name = L"dataGridView2_Orders";
 			this->dataGridView2_Orders->ReadOnly = true;
 			this->dataGridView2_Orders->RowHeadersWidth = 92;
 			this->dataGridView2_Orders->RowTemplate->Height = 37;
-			this->dataGridView2_Orders->Size = System::Drawing::Size(1848, 435);
+			this->dataGridView2_Orders->Size = System::Drawing::Size(821, 193);
 			this->dataGridView2_Orders->TabIndex = 53;
 			this->dataGridView2_Orders->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_Orders_CellClick);
 			// 
 			// label_add_device
 			// 
 			this->label_add_device->AutoSize = true;
-			this->label_add_device->Location = System::Drawing::Point(1430, 424);
-			this->label_add_device->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label_add_device->Location = System::Drawing::Point(636, 188);
 			this->label_add_device->Name = L"label_add_device";
-			this->label_add_device->Size = System::Drawing::Size(423, 47);
+			this->label_add_device->Size = System::Drawing::Size(193, 22);
 			this->label_add_device->TabIndex = 52;
 			this->label_add_device->Text = L"Отображение заказа";
 			// 
 			// button_add_device
 			// 
-			this->button_add_device->Location = System::Drawing::Point(1526, 328);
-			this->button_add_device->Margin = System::Windows::Forms::Padding(7);
+			this->button_add_device->Location = System::Drawing::Point(678, 146);
 			this->button_add_device->Name = L"button_add_device";
-			this->button_add_device->Size = System::Drawing::Size(481, 67);
+			this->button_add_device->Size = System::Drawing::Size(214, 30);
 			this->button_add_device->TabIndex = 51;
 			this->button_add_device->Text = L"Добавить устройство";
 			this->button_add_device->UseVisualStyleBackColor = true;
@@ -829,19 +981,17 @@ private: System::Windows::Forms::Button^ button8;
 			// Order_Label
 			// 
 			this->Order_Label->AutoSize = true;
-			this->Order_Label->Location = System::Drawing::Point(184, 424);
-			this->Order_Label->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->Order_Label->Location = System::Drawing::Point(82, 188);
 			this->Order_Label->Name = L"Order_Label";
-			this->Order_Label->Size = System::Drawing::Size(423, 47);
+			this->Order_Label->Size = System::Drawing::Size(193, 22);
 			this->Order_Label->TabIndex = 50;
 			this->Order_Label->Text = L"Отображение заказа";
 			// 
 			// button_add_order
 			// 
-			this->button_add_order->Location = System::Drawing::Point(194, 257);
-			this->button_add_order->Margin = System::Windows::Forms::Padding(7);
+			this->button_add_order->Location = System::Drawing::Point(86, 114);
 			this->button_add_order->Name = L"button_add_order";
-			this->button_add_order->Size = System::Drawing::Size(415, 67);
+			this->button_add_order->Size = System::Drawing::Size(184, 30);
 			this->button_add_order->TabIndex = 49;
 			this->button_add_order->Text = L"Добавить заказ";
 			this->button_add_order->UseVisualStyleBackColor = true;
@@ -850,55 +1000,49 @@ private: System::Windows::Forms::Button^ button8;
 			// label21
 			// 
 			this->label21->AutoSize = true;
-			this->label21->Location = System::Drawing::Point(1199, 257);
-			this->label21->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label21->Location = System::Drawing::Point(533, 114);
 			this->label21->Name = L"label21";
-			this->label21->Size = System::Drawing::Size(318, 47);
+			this->label21->Size = System::Drawing::Size(145, 22);
 			this->label21->TabIndex = 48;
 			this->label21->Text = L"Производитель";
 			// 
 			// Brand_Box
 			// 
-			this->Brand_Box->Location = System::Drawing::Point(1566, 250);
-			this->Brand_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Brand_Box->Location = System::Drawing::Point(696, 111);
 			this->Brand_Box->Name = L"Brand_Box";
-			this->Brand_Box->Size = System::Drawing::Size(370, 56);
+			this->Brand_Box->Size = System::Drawing::Size(167, 29);
 			this->Brand_Box->TabIndex = 47;
 			// 
 			// label20
 			// 
 			this->label20->AutoSize = true;
-			this->label20->Location = System::Drawing::Point(1199, 176);
-			this->label20->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label20->Location = System::Drawing::Point(533, 78);
 			this->label20->Name = L"label20";
-			this->label20->Size = System::Drawing::Size(317, 47);
+			this->label20->Size = System::Drawing::Size(142, 22);
 			this->label20->TabIndex = 46;
 			this->label20->Text = L"Тип устройства";
 			// 
 			// DeviceType_Box
 			// 
-			this->DeviceType_Box->Location = System::Drawing::Point(1566, 170);
-			this->DeviceType_Box->Margin = System::Windows::Forms::Padding(7);
+			this->DeviceType_Box->Location = System::Drawing::Point(696, 76);
 			this->DeviceType_Box->Name = L"DeviceType_Box";
-			this->DeviceType_Box->Size = System::Drawing::Size(370, 56);
+			this->DeviceType_Box->Size = System::Drawing::Size(167, 29);
 			this->DeviceType_Box->TabIndex = 45;
 			// 
 			// label19
 			// 
 			this->label19->AutoSize = true;
-			this->label19->Location = System::Drawing::Point(1199, 98);
-			this->label19->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label19->Location = System::Drawing::Point(533, 44);
 			this->label19->Name = L"label19";
-			this->label19->Size = System::Drawing::Size(200, 47);
+			this->label19->Size = System::Drawing::Size(91, 22);
 			this->label19->TabIndex = 44;
 			this->label19->Text = L"ID заказа";
 			// 
 			// ID_Order_Box
 			// 
-			this->ID_Order_Box->Location = System::Drawing::Point(1566, 91);
-			this->ID_Order_Box->Margin = System::Windows::Forms::Padding(7);
+			this->ID_Order_Box->Location = System::Drawing::Point(696, 40);
 			this->ID_Order_Box->Name = L"ID_Order_Box";
-			this->ID_Order_Box->Size = System::Drawing::Size(370, 56);
+			this->ID_Order_Box->Size = System::Drawing::Size(167, 29);
 			this->ID_Order_Box->TabIndex = 43;
 			// 
 			// comboBox1_Status
@@ -909,76 +1053,69 @@ private: System::Windows::Forms::Button^ button8;
 				L"Ожидание", L"Диагностика", L"Ремонт",
 					L"Завершён"
 			});
-			this->comboBox1_Status->Location = System::Drawing::Point(1566, 549);
-			this->comboBox1_Status->Margin = System::Windows::Forms::Padding(2);
+			this->comboBox1_Status->Location = System::Drawing::Point(696, 244);
+			this->comboBox1_Status->Margin = System::Windows::Forms::Padding(1);
 			this->comboBox1_Status->Name = L"comboBox1_Status";
-			this->comboBox1_Status->Size = System::Drawing::Size(370, 55);
+			this->comboBox1_Status->Size = System::Drawing::Size(167, 30);
 			this->comboBox1_Status->TabIndex = 42;
 			this->comboBox1_Status->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox1_Status_SelectedIndexChanged);
 			// 
 			// label16
 			// 
 			this->label16->AutoSize = true;
-			this->label16->Location = System::Drawing::Point(138, 183);
-			this->label16->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label16->Location = System::Drawing::Point(61, 81);
 			this->label16->Name = L"label16";
-			this->label16->Size = System::Drawing::Size(120, 47);
+			this->label16->Size = System::Drawing::Size(55, 22);
 			this->label16->TabIndex = 41;
 			this->label16->Text = L"Цена";
 			// 
 			// Price_Box
 			// 
-			this->Price_Box->Location = System::Drawing::Point(455, 176);
-			this->Price_Box->Margin = System::Windows::Forms::Padding(7);
+			this->Price_Box->Location = System::Drawing::Point(202, 78);
 			this->Price_Box->Name = L"Price_Box";
-			this->Price_Box->Size = System::Drawing::Size(370, 56);
+			this->Price_Box->Size = System::Drawing::Size(167, 29);
 			this->Price_Box->TabIndex = 40;
 			// 
 			// label17
 			// 
 			this->label17->AutoSize = true;
-			this->label17->Location = System::Drawing::Point(1178, 555);
-			this->label17->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label17->Location = System::Drawing::Point(524, 247);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(290, 47);
+			this->label17->Size = System::Drawing::Size(130, 22);
 			this->label17->TabIndex = 39;
 			this->label17->Text = L"Статус заказа";
 			// 
 			// label18
 			// 
 			this->label18->AutoSize = true;
-			this->label18->Location = System::Drawing::Point(89, 91);
-			this->label18->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label18->Location = System::Drawing::Point(40, 40);
 			this->label18->Name = L"label18";
-			this->label18->Size = System::Drawing::Size(228, 47);
+			this->label18->Size = System::Drawing::Size(102, 22);
 			this->label18->TabIndex = 38;
 			this->label18->Text = L"ID клиента";
 			// 
 			// ID_Client_Box
 			// 
-			this->ID_Client_Box->Location = System::Drawing::Point(455, 85);
-			this->ID_Client_Box->Margin = System::Windows::Forms::Padding(7);
+			this->ID_Client_Box->Location = System::Drawing::Point(202, 38);
 			this->ID_Client_Box->Name = L"ID_Client_Box";
-			this->ID_Client_Box->Size = System::Drawing::Size(370, 56);
+			this->ID_Client_Box->Size = System::Drawing::Size(167, 29);
 			this->ID_Client_Box->TabIndex = 36;
 			// 
 			// label8
 			// 
 			this->label8->AutoSize = true;
-			this->label8->Location = System::Drawing::Point(1524, 20);
-			this->label8->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label8->Location = System::Drawing::Point(677, 9);
 			this->label8->Name = L"label8";
-			this->label8->Size = System::Drawing::Size(461, 47);
+			this->label8->Size = System::Drawing::Size(207, 22);
 			this->label8->TabIndex = 31;
 			this->label8->Text = L"Устройство для заказа";
 			// 
 			// label11
 			// 
 			this->label11->AutoSize = true;
-			this->label11->Location = System::Drawing::Point(208, 20);
-			this->label11->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label11->Location = System::Drawing::Point(92, 9);
 			this->label11->Name = L"label11";
-			this->label11->Size = System::Drawing::Size(412, 47);
+			this->label11->Size = System::Drawing::Size(186, 22);
 			this->label11->TabIndex = 30;
 			this->label11->Text = L"Составление заказа";
 			// 
@@ -1000,10 +1137,10 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage4->Controls->Add(this->label22);
 			this->tabPage4->Controls->Add(this->textBox_order_forreport);
 			this->tabPage4->Controls->Add(this->label_23);
-			this->tabPage4->Location = System::Drawing::Point(10, 65);
-			this->tabPage4->Margin = System::Windows::Forms::Padding(2);
+			this->tabPage4->Location = System::Drawing::Point(4, 31);
+			this->tabPage4->Margin = System::Windows::Forms::Padding(1);
 			this->tabPage4->Name = L"tabPage4";
-			this->tabPage4->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage4->Size = System::Drawing::Size(923, 531);
 			this->tabPage4->TabIndex = 3;
 			this->tabPage4->Text = L"Отчёты";
 			this->tabPage4->Click += gcnew System::EventHandler(this, &MyForm::tabPage4_Click);
@@ -1011,9 +1148,10 @@ private: System::Windows::Forms::Button^ button8;
 			// label28
 			// 
 			this->label28->AutoSize = true;
-			this->label28->Location = System::Drawing::Point(1387, 36);
+			this->label28->Location = System::Drawing::Point(616, 16);
+			this->label28->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->label28->Name = L"label28";
-			this->label28->Size = System::Drawing::Size(424, 47);
+			this->label28->Size = System::Drawing::Size(193, 22);
 			this->label28->TabIndex = 60;
 			this->label28->Text = L"Категория проблемы";
 			// 
@@ -1024,18 +1162,18 @@ private: System::Windows::Forms::Button^ button8;
 				L"Ноутбук", L"ПК Системный блок", L"Телефон",
 					L"Другое"
 			});
-			this->comboBox_for_category->Location = System::Drawing::Point(1383, 101);
+			this->comboBox_for_category->Location = System::Drawing::Point(615, 45);
+			this->comboBox_for_category->Margin = System::Windows::Forms::Padding(1);
 			this->comboBox_for_category->Name = L"comboBox_for_category";
-			this->comboBox_for_category->Size = System::Drawing::Size(428, 55);
+			this->comboBox_for_category->Size = System::Drawing::Size(192, 30);
 			this->comboBox_for_category->TabIndex = 59;
 			// 
 			// button6
 			// 
 			this->button6->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button6->Location = System::Drawing::Point(28, 1005);
-			this->button6->Margin = System::Windows::Forms::Padding(7);
+			this->button6->Location = System::Drawing::Point(12, 447);
 			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(445, 78);
+			this->button6->Size = System::Drawing::Size(198, 35);
 			this->button6->TabIndex = 58;
 			this->button6->Text = L"Удалить отчёт";
 			this->button6->UseVisualStyleBackColor = false;
@@ -1044,10 +1182,9 @@ private: System::Windows::Forms::Button^ button8;
 			// button5
 			// 
 			this->button5->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button5->Location = System::Drawing::Point(28, 892);
-			this->button5->Margin = System::Windows::Forms::Padding(7);
+			this->button5->Location = System::Drawing::Point(12, 396);
 			this->button5->Name = L"button5";
-			this->button5->Size = System::Drawing::Size(445, 78);
+			this->button5->Size = System::Drawing::Size(198, 35);
 			this->button5->TabIndex = 57;
 			this->button5->Text = L"Отобразить отчёт";
 			this->button5->UseVisualStyleBackColor = false;
@@ -1056,9 +1193,10 @@ private: System::Windows::Forms::Button^ button8;
 			// textBox_selected_report
 			// 
 			this->textBox_selected_report->ForeColor = System::Drawing::Color::LightGray;
-			this->textBox_selected_report->Location = System::Drawing::Point(28, 803);
+			this->textBox_selected_report->Location = System::Drawing::Point(12, 357);
+			this->textBox_selected_report->Margin = System::Windows::Forms::Padding(1);
 			this->textBox_selected_report->Name = L"textBox_selected_report";
-			this->textBox_selected_report->Size = System::Drawing::Size(445, 56);
+			this->textBox_selected_report->Size = System::Drawing::Size(200, 29);
 			this->textBox_selected_report->TabIndex = 56;
 			this->textBox_selected_report->Text = L"Введите ID отчёта...";
 			this->textBox_selected_report->Enter += gcnew System::EventHandler(this, &MyForm::textBox1_Enter);
@@ -1067,10 +1205,9 @@ private: System::Windows::Forms::Button^ button8;
 			// button_show_reports
 			// 
 			this->button_show_reports->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button_show_reports->Location = System::Drawing::Point(28, 700);
-			this->button_show_reports->Margin = System::Windows::Forms::Padding(7);
+			this->button_show_reports->Location = System::Drawing::Point(12, 311);
 			this->button_show_reports->Name = L"button_show_reports";
-			this->button_show_reports->Size = System::Drawing::Size(445, 78);
+			this->button_show_reports->Size = System::Drawing::Size(198, 35);
 			this->button_show_reports->TabIndex = 55;
 			this->button_show_reports->Text = L"Показать отчёты";
 			this->button_show_reports->UseVisualStyleBackColor = false;
@@ -1085,32 +1222,32 @@ private: System::Windows::Forms::Button^ button8;
 			this->dataGridView2_reports->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView2_reports->BackgroundColor = System::Drawing::Color::Tomato;
 			this->dataGridView2_reports->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView2_reports->Location = System::Drawing::Point(501, 748);
-			this->dataGridView2_reports->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView2_reports->Location = System::Drawing::Point(223, 332);
+			this->dataGridView2_reports->Margin = System::Windows::Forms::Padding(1);
 			this->dataGridView2_reports->Name = L"dataGridView2_reports";
 			this->dataGridView2_reports->ReadOnly = true;
 			this->dataGridView2_reports->RowHeadersWidth = 92;
 			this->dataGridView2_reports->RowTemplate->Height = 37;
-			this->dataGridView2_reports->Size = System::Drawing::Size(1469, 435);
+			this->dataGridView2_reports->Size = System::Drawing::Size(653, 193);
 			this->dataGridView2_reports->TabIndex = 54;
 			this->dataGridView2_reports->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView2_reports_CellClick);
 			// 
 			// label_for_reports
 			// 
 			this->label_for_reports->AutoSize = true;
-			this->label_for_reports->Location = System::Drawing::Point(833, 104);
+			this->label_for_reports->Location = System::Drawing::Point(370, 46);
+			this->label_for_reports->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->label_for_reports->Name = L"label_for_reports";
-			this->label_for_reports->Size = System::Drawing::Size(401, 47);
+			this->label_for_reports->Size = System::Drawing::Size(184, 22);
 			this->label_for_reports->TabIndex = 51;
 			this->label_for_reports->Text = L"Отображение отчет";
 			// 
 			// button4
 			// 
 			this->button4->BackColor = System::Drawing::SystemColors::AppWorkspace;
-			this->button4->Location = System::Drawing::Point(28, 581);
-			this->button4->Margin = System::Windows::Forms::Padding(7);
+			this->button4->Location = System::Drawing::Point(12, 258);
 			this->button4->Name = L"button4";
-			this->button4->Size = System::Drawing::Size(445, 105);
+			this->button4->Size = System::Drawing::Size(198, 47);
 			this->button4->TabIndex = 50;
 			this->button4->Text = L"Добавить отчёт";
 			this->button4->UseVisualStyleBackColor = false;
@@ -1119,67 +1256,64 @@ private: System::Windows::Forms::Button^ button8;
 			// richTextBox1_for_recommendtaion
 			// 
 			this->richTextBox1_for_recommendtaion->BackColor = System::Drawing::SystemColors::Info;
-			this->richTextBox1_for_recommendtaion->Location = System::Drawing::Point(501, 504);
+			this->richTextBox1_for_recommendtaion->Location = System::Drawing::Point(223, 224);
+			this->richTextBox1_for_recommendtaion->Margin = System::Windows::Forms::Padding(1);
 			this->richTextBox1_for_recommendtaion->Name = L"richTextBox1_for_recommendtaion";
-			this->richTextBox1_for_recommendtaion->Size = System::Drawing::Size(1469, 182);
+			this->richTextBox1_for_recommendtaion->Size = System::Drawing::Size(655, 83);
 			this->richTextBox1_for_recommendtaion->TabIndex = 46;
 			this->richTextBox1_for_recommendtaion->Text = L"";
 			// 
 			// label24
 			// 
 			this->label24->AutoSize = true;
-			this->label24->Location = System::Drawing::Point(99, 504);
-			this->label24->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label24->Location = System::Drawing::Point(44, 224);
 			this->label24->Name = L"label24";
-			this->label24->Size = System::Drawing::Size(303, 47);
+			this->label24->Size = System::Drawing::Size(138, 22);
 			this->label24->TabIndex = 45;
 			this->label24->Text = L"Рекомендации";
 			this->label24->Click += gcnew System::EventHandler(this, &MyForm::label24_Click);
 			// 
 			// richTextBox1_for_problem
 			// 
-			this->richTextBox1_for_problem->Location = System::Drawing::Point(501, 204);
+			this->richTextBox1_for_problem->Location = System::Drawing::Point(223, 91);
+			this->richTextBox1_for_problem->Margin = System::Windows::Forms::Padding(1);
 			this->richTextBox1_for_problem->Name = L"richTextBox1_for_problem";
-			this->richTextBox1_for_problem->Size = System::Drawing::Size(1469, 283);
+			this->richTextBox1_for_problem->Size = System::Drawing::Size(655, 128);
 			this->richTextBox1_for_problem->TabIndex = 44;
 			this->richTextBox1_for_problem->Text = L"";
 			// 
 			// label23
 			// 
 			this->label23->AutoSize = true;
-			this->label23->Location = System::Drawing::Point(51, 204);
-			this->label23->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label23->Location = System::Drawing::Point(23, 91);
 			this->label23->Name = L"label23";
-			this->label23->Size = System::Drawing::Size(422, 47);
+			this->label23->Size = System::Drawing::Size(189, 22);
 			this->label23->TabIndex = 43;
 			this->label23->Text = L"Описание проблемы";
 			// 
 			// label22
 			// 
 			this->label22->AutoSize = true;
-			this->label22->Location = System::Drawing::Point(51, 107);
-			this->label22->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label22->Location = System::Drawing::Point(23, 48);
 			this->label22->Name = L"label22";
-			this->label22->Size = System::Drawing::Size(200, 47);
+			this->label22->Size = System::Drawing::Size(91, 22);
 			this->label22->TabIndex = 41;
 			this->label22->Text = L"ID заказа";
 			// 
 			// textBox_order_forreport
 			// 
-			this->textBox_order_forreport->Location = System::Drawing::Point(417, 101);
-			this->textBox_order_forreport->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_forreport->Location = System::Drawing::Point(185, 45);
 			this->textBox_order_forreport->Name = L"textBox_order_forreport";
-			this->textBox_order_forreport->Size = System::Drawing::Size(370, 56);
+			this->textBox_order_forreport->Size = System::Drawing::Size(167, 29);
 			this->textBox_order_forreport->TabIndex = 40;
 			this->textBox_order_forreport->TextChanged += gcnew System::EventHandler(this, &MyForm::textBox_order_forreport_TextChanged);
 			// 
 			// label_23
 			// 
 			this->label_23->AutoSize = true;
-			this->label_23->Location = System::Drawing::Point(170, 36);
-			this->label_23->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label_23->Location = System::Drawing::Point(76, 16);
 			this->label_23->Name = L"label_23";
-			this->label_23->Size = System::Drawing::Size(414, 47);
+			this->label_23->Size = System::Drawing::Size(188, 22);
 			this->label_23->TabIndex = 39;
 			this->label_23->Text = L"Составление отчёта";
 			// 
@@ -1196,18 +1330,19 @@ private: System::Windows::Forms::Button^ button8;
 			this->tabPage5->Controls->Add(this->label27);
 			this->tabPage5->Controls->Add(this->textBox_order_idemployee);
 			this->tabPage5->Controls->Add(this->textBox_order_foridorder);
-			this->tabPage5->Location = System::Drawing::Point(10, 65);
-			this->tabPage5->Margin = System::Windows::Forms::Padding(2);
+			this->tabPage5->Location = System::Drawing::Point(4, 31);
+			this->tabPage5->Margin = System::Windows::Forms::Padding(1);
 			this->tabPage5->Name = L"tabPage5";
-			this->tabPage5->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage5->Size = System::Drawing::Size(923, 531);
 			this->tabPage5->TabIndex = 4;
 			this->tabPage5->Text = L"Распределение заказов";
 			// 
 			// button7
 			// 
-			this->button7->Location = System::Drawing::Point(763, 599);
+			this->button7->Location = System::Drawing::Point(339, 266);
+			this->button7->Margin = System::Windows::Forms::Padding(1);
 			this->button7->Name = L"button7";
-			this->button7->Size = System::Drawing::Size(363, 58);
+			this->button7->Size = System::Drawing::Size(161, 26);
 			this->button7->TabIndex = 56;
 			this->button7->Text = L"Удалить связь";
 			this->button7->UseVisualStyleBackColor = true;
@@ -1216,9 +1351,10 @@ private: System::Windows::Forms::Button^ button8;
 			// textBox_for_selected_asign
 			// 
 			this->textBox_for_selected_asign->ForeColor = System::Drawing::Color::LightGray;
-			this->textBox_for_selected_asign->Location = System::Drawing::Point(228, 601);
+			this->textBox_for_selected_asign->Location = System::Drawing::Point(101, 267);
+			this->textBox_for_selected_asign->Margin = System::Windows::Forms::Padding(1);
 			this->textBox_for_selected_asign->Name = L"textBox_for_selected_asign";
-			this->textBox_for_selected_asign->Size = System::Drawing::Size(417, 56);
+			this->textBox_for_selected_asign->Size = System::Drawing::Size(188, 29);
 			this->textBox_for_selected_asign->TabIndex = 55;
 			this->textBox_for_selected_asign->Text = L"Введите ID заказа...";
 			this->textBox_for_selected_asign->Enter += gcnew System::EventHandler(this, &MyForm::textBox_for_selected_asign_Enter);
@@ -1233,21 +1369,22 @@ private: System::Windows::Forms::Button^ button8;
 			this->dataGridView_for_asign->AutoSizeColumnsMode = System::Windows::Forms::DataGridViewAutoSizeColumnsMode::Fill;
 			this->dataGridView_for_asign->BackgroundColor = System::Drawing::Color::CornflowerBlue;
 			this->dataGridView_for_asign->ColumnHeadersHeightSizeMode = System::Windows::Forms::DataGridViewColumnHeadersHeightSizeMode::AutoSize;
-			this->dataGridView_for_asign->Location = System::Drawing::Point(116, 732);
-			this->dataGridView_for_asign->Margin = System::Windows::Forms::Padding(2);
+			this->dataGridView_for_asign->Location = System::Drawing::Point(52, 325);
+			this->dataGridView_for_asign->Margin = System::Windows::Forms::Padding(1);
 			this->dataGridView_for_asign->Name = L"dataGridView_for_asign";
 			this->dataGridView_for_asign->ReadOnly = true;
 			this->dataGridView_for_asign->RowHeadersWidth = 92;
 			this->dataGridView_for_asign->RowTemplate->Height = 37;
-			this->dataGridView_for_asign->Size = System::Drawing::Size(1848, 435);
+			this->dataGridView_for_asign->Size = System::Drawing::Size(821, 193);
 			this->dataGridView_for_asign->TabIndex = 54;
 			this->dataGridView_for_asign->CellClick += gcnew System::Windows::Forms::DataGridViewCellEventHandler(this, &MyForm::dataGridView_for_asign_CellClick);
 			// 
 			// button_show_all_asign
 			// 
-			this->button_show_all_asign->Location = System::Drawing::Point(434, 365);
+			this->button_show_all_asign->Location = System::Drawing::Point(193, 162);
+			this->button_show_all_asign->Margin = System::Windows::Forms::Padding(1);
 			this->button_show_all_asign->Name = L"button_show_all_asign";
-			this->button_show_all_asign->Size = System::Drawing::Size(396, 73);
+			this->button_show_all_asign->Size = System::Drawing::Size(176, 32);
 			this->button_show_all_asign->TabIndex = 19;
 			this->button_show_all_asign->Text = L"Отобразить связи";
 			this->button_show_all_asign->UseVisualStyleBackColor = true;
@@ -1256,17 +1393,19 @@ private: System::Windows::Forms::Button^ button8;
 			// label_for_asign
 			// 
 			this->label_for_asign->AutoSize = true;
-			this->label_for_asign->Location = System::Drawing::Point(492, 500);
+			this->label_for_asign->Location = System::Drawing::Point(219, 222);
+			this->label_for_asign->Margin = System::Windows::Forms::Padding(1, 0, 1, 0);
 			this->label_for_asign->Name = L"label_for_asign";
-			this->label_for_asign->Size = System::Drawing::Size(285, 47);
+			this->label_for_asign->Size = System::Drawing::Size(132, 22);
 			this->label_for_asign->TabIndex = 18;
 			this->label_for_asign->Text = L"Отображение";
 			// 
 			// button_for_making_order
 			// 
-			this->button_for_making_order->Location = System::Drawing::Point(434, 286);
+			this->button_for_making_order->Location = System::Drawing::Point(193, 127);
+			this->button_for_making_order->Margin = System::Windows::Forms::Padding(1);
 			this->button_for_making_order->Name = L"button_for_making_order";
-			this->button_for_making_order->Size = System::Drawing::Size(396, 61);
+			this->button_for_making_order->Size = System::Drawing::Size(176, 27);
 			this->button_for_making_order->TabIndex = 17;
 			this->button_for_making_order->Text = L"Выдать заказ";
 			this->button_for_making_order->UseVisualStyleBackColor = true;
@@ -1275,56 +1414,52 @@ private: System::Windows::Forms::Button^ button8;
 			// label25
 			// 
 			this->label25->AutoSize = true;
-			this->label25->Location = System::Drawing::Point(220, 50);
-			this->label25->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label25->Location = System::Drawing::Point(98, 22);
 			this->label25->Name = L"label25";
-			this->label25->Size = System::Drawing::Size(410, 47);
+			this->label25->Size = System::Drawing::Size(184, 22);
 			this->label25->TabIndex = 16;
 			this->label25->Text = L"Распределить заказ";
 			// 
 			// label26
 			// 
 			this->label26->AutoSize = true;
-			this->label26->Location = System::Drawing::Point(149, 201);
-			this->label26->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label26->Location = System::Drawing::Point(66, 89);
 			this->label26->Name = L"label26";
-			this->label26->Size = System::Drawing::Size(200, 47);
+			this->label26->Size = System::Drawing::Size(91, 22);
 			this->label26->TabIndex = 15;
 			this->label26->Text = L"ID заказа";
 			// 
 			// label27
 			// 
 			this->label27->AutoSize = true;
-			this->label27->Location = System::Drawing::Point(108, 117);
-			this->label27->Margin = System::Windows::Forms::Padding(7, 0, 7, 0);
+			this->label27->Location = System::Drawing::Point(48, 52);
 			this->label27->Name = L"label27";
-			this->label27->Size = System::Drawing::Size(277, 47);
+			this->label27->Size = System::Drawing::Size(125, 22);
 			this->label27->TabIndex = 14;
 			this->label27->Text = L"ID Работника";
 			// 
 			// textBox_order_idemployee
 			// 
-			this->textBox_order_idemployee->Location = System::Drawing::Point(434, 114);
-			this->textBox_order_idemployee->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_idemployee->Location = System::Drawing::Point(193, 51);
 			this->textBox_order_idemployee->Name = L"textBox_order_idemployee";
-			this->textBox_order_idemployee->Size = System::Drawing::Size(396, 56);
+			this->textBox_order_idemployee->Size = System::Drawing::Size(178, 29);
 			this->textBox_order_idemployee->TabIndex = 12;
 			// 
 			// textBox_order_foridorder
 			// 
-			this->textBox_order_foridorder->Location = System::Drawing::Point(434, 192);
-			this->textBox_order_foridorder->Margin = System::Windows::Forms::Padding(7);
+			this->textBox_order_foridorder->Location = System::Drawing::Point(193, 85);
 			this->textBox_order_foridorder->Name = L"textBox_order_foridorder";
-			this->textBox_order_foridorder->Size = System::Drawing::Size(396, 56);
+			this->textBox_order_foridorder->Size = System::Drawing::Size(178, 29);
 			this->textBox_order_foridorder->TabIndex = 13;
 			// 
 			// tabPage6
 			// 
 			this->tabPage6->Controls->Add(this->chart1);
 			this->tabPage6->Controls->Add(this->button8);
-			this->tabPage6->Location = System::Drawing::Point(10, 65);
+			this->tabPage6->Location = System::Drawing::Point(4, 31);
+			this->tabPage6->Margin = System::Windows::Forms::Padding(1);
 			this->tabPage6->Name = L"tabPage6";
-			this->tabPage6->Size = System::Drawing::Size(2075, 1199);
+			this->tabPage6->Size = System::Drawing::Size(923, 531);
 			this->tabPage6->TabIndex = 5;
 			this->tabPage6->Text = L"Статистика";
 			// 
@@ -1334,39 +1469,49 @@ private: System::Windows::Forms::Button^ button8;
 			this->chart1->ChartAreas->Add(chartArea1);
 			legend1->Name = L"Legend1";
 			this->chart1->Legends->Add(legend1);
-			this->chart1->Location = System::Drawing::Point(489, 199);
+			this->chart1->Location = System::Drawing::Point(217, 88);
+			this->chart1->Margin = System::Windows::Forms::Padding(1);
 			this->chart1->Name = L"chart1";
 			series1->ChartArea = L"ChartArea1";
 			series1->Legend = L"Legend1";
 			series1->Name = L"Series1";
 			this->chart1->Series->Add(series1);
-			this->chart1->Size = System::Drawing::Size(1203, 633);
+			this->chart1->Size = System::Drawing::Size(535, 281);
 			this->chart1->TabIndex = 1;
 			this->chart1->Text = L"chart1";
 			// 
 			// button8
 			// 
-			this->button8->Location = System::Drawing::Point(682, 45);
+			this->button8->Location = System::Drawing::Point(303, 20);
+			this->button8->Margin = System::Windows::Forms::Padding(1);
 			this->button8->Name = L"button8";
-			this->button8->Size = System::Drawing::Size(784, 65);
+			this->button8->Size = System::Drawing::Size(348, 29);
 			this->button8->TabIndex = 0;
 			this->button8->Text = L"Отобразить диаграмму категорий";
 			this->button8->UseVisualStyleBackColor = true;
 			this->button8->Click += gcnew System::EventHandler(this, &MyForm::button8_Click);
 			// 
+			// contextMenuStrip1
+			// 
+			this->contextMenuStrip1->Name = L"contextMenuStrip1";
+			this->contextMenuStrip1->Size = System::Drawing::Size(61, 4);
+			// 
 			// MyForm
 			// 
-			this->AutoScaleDimensions = System::Drawing::SizeF(216, 216);
+			this->AutoScaleDimensions = System::Drawing::SizeF(96, 96);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Dpi;
-			this->ClientSize = System::Drawing::Size(2095, 1274);
+			this->ClientSize = System::Drawing::Size(931, 566);
 			this->Controls->Add(this->tabControl1);
-			this->Margin = System::Windows::Forms::Padding(2);
+			this->Margin = System::Windows::Forms::Padding(1);
 			this->Name = L"MyForm";
 			this->Text = L"MyForm";
 			this->tabControl1->ResumeLayout(false);
 			this->tabPage1->ResumeLayout(false);
 			this->tabPage1->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->EndInit();
+			this->tabPage7->ResumeLayout(false);
+			this->tabPage7->PerformLayout();
+			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView_Departments))->EndInit();
 			this->tabPage2->ResumeLayout(false);
 			this->tabPage2->PerformLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView2_employee))->EndInit();
@@ -1488,6 +1633,11 @@ private: System::Void textBox_order_forreport_TextChanged(System::Object^ sender
 }
 private: System::Void button8_Click(System::Object^ sender, System::EventArgs^ e);
 
+private: System::Void label34_Click(System::Object^ sender, System::EventArgs^ e) {
+}
+private: System::Void button_add_department_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_show_all_departmnents_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_to_delete_department_Click(System::Object^ sender, System::EventArgs^ e);
 };
 
 

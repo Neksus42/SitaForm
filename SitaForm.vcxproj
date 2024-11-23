@@ -131,6 +131,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Departments.cpp" />
     <ClCompile Include="Diagram.cpp" />
     <ClCompile Include="Making_Order.cpp" />
     <ClCompile Include="MyForm.cpp" />
