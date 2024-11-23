@@ -41,9 +41,10 @@ void main(array<String^>^ args)
         con = driver->connect("localhost", "root", "1111");
         con->setClientOption("characterSetResults", "utf8mb4");
 
-        con->setSchema("sita");
+        con->setSchema("lerbd");
         stmt = con->createStatement();
         stmt->execute("SET NAMES 'cp1251'");
+        setlocale(LC_ALL,"rus");
        /* stmt = con->createStatement();*/
 
 
@@ -91,6 +92,7 @@ void SitaForm::MyForm::addclient()
 {
     try
     {
+        //SELECT * FROM lerbd.клиент;
         std::string phone = ConvertString(this->ClientPhoneBox->Text);
         std::string name = ConvertString(this->ClientNameBox->Text);
         std::cout << "Name: " + name + "\n";
@@ -106,7 +108,7 @@ void SitaForm::MyForm::addclient()
             return;
         }
         
-        std::string checkexisted = "SELECT * FROM sita.customers where ContactInfo = '" + phone + "';";
+        std::string checkexisted = "SELECT * FROM lerbd.клиент where Номер_телефона = '" + phone + "';";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -117,7 +119,7 @@ void SitaForm::MyForm::addclient()
         }
         else
         {
-            std::string addclient = "INSERT INTO `sita`.`customers` (`Name`, `ContactInfo`) VALUES('" + name + "', '" + phone + "');";
+            std::string addclient = "INSERT INTO `lerbd`.`клиент` (`ФИО`, `Номер_телефона`) VALUES('" + name + "', '" + phone + "');";
             std::cout << addclient + "\n";
             stmt = con->createStatement();
             stmt->executeUpdate(addclient);
@@ -135,7 +137,7 @@ void SitaForm::MyForm::show_all_clients()
     try
     {
         
-        std::string selectQuery = "SELECT * FROM sita.customers;";
+        std::string selectQuery = "SELECT * FROM lerbd.клиент;";
         stmt = con->createStatement();
         res = stmt->executeQuery(selectQuery);
         
@@ -143,21 +145,21 @@ void SitaForm::MyForm::show_all_clients()
         System::Data::DataTable^ dataTable = gcnew System::Data::DataTable();
 
         
-        dataTable->Columns->Add("ID", int::typeid);
-        dataTable->Columns->Add("Name", String::typeid);
-        dataTable->Columns->Add("ContactInfo", String::typeid);
+        dataTable->Columns->Add("ID_клиент", int::typeid);
+        dataTable->Columns->Add("ФИО", String::typeid);
+        dataTable->Columns->Add("Номер_телефона", String::typeid);
 
         while (res->next())
         {
             
-            int id = res->getInt("idCustomer");
-            std::string name = res->getString("Name");
-            std::string contactInfo = res->getString("ContactInfo");
+            int id = res->getInt("ID_клиент");
+            std::string name = res->getString("ФИО");
+            std::string contactInfo = res->getString("Номер_телефона");
             std::cerr << "id" + std::to_string(id) << std::endl;
             dataTable->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()));
         }
 
-        
+        std::cout << selectQuery << std::endl;
         this->dataGridView1->DataSource = dataTable;
     }
     catch (sql::SQLException& e)
@@ -184,7 +186,7 @@ void SitaForm::MyForm::delete_client()
             return;
         }
 
-        std::string checkexisted = "SELECT * FROM sita.customers where idCustomer = '" + id + "';";
+        std::string checkexisted = "SELECT * FROM lerbd.клиент where ID_клиент = '" + id + "';";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -195,7 +197,7 @@ void SitaForm::MyForm::delete_client()
         }
         else
         {
-            std::string addclient = "DELETE FROM `sita`.`customers` WHERE (`idCustomer` = '"+id+"');";
+            std::string addclient = "DELETE FROM `lerbd`.`клиент` WHERE (`ID_клиент` = '"+id+"');";
             std::cout << addclient + "\n";
             stmt = con->createStatement();
             stmt->executeUpdate(addclient);
