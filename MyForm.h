@@ -207,6 +207,8 @@ private: System::Windows::Forms::Label^ label34;
 
 private: System::Windows::Forms::Label^ label36;
 private: System::Windows::Forms::TextBox^ textbox_foraddDepartment;
+private: System::Windows::Forms::Label^ label29;
+private: System::Windows::Forms::TextBox^ textBox_for_id_department_employee;
 
 
 private: System::ComponentModel::IContainer^ components;
@@ -359,6 +361,8 @@ private: System::ComponentModel::IContainer^ components;
 			this->chart1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Chart());
 			this->button8 = (gcnew System::Windows::Forms::Button());
 			this->contextMenuStrip1 = (gcnew System::Windows::Forms::ContextMenuStrip(this->components));
+			this->label29 = (gcnew System::Windows::Forms::Label());
+			this->textBox_for_id_department_employee = (gcnew System::Windows::Forms::TextBox());
 			this->tabControl1->SuspendLayout();
 			this->tabPage1->SuspendLayout();
 			(cli::safe_cast<System::ComponentModel::ISupportInitialize^>(this->dataGridView1))->BeginInit();
@@ -692,6 +696,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// tabPage2
 			// 
+			this->tabPage2->Controls->Add(this->label29);
+			this->tabPage2->Controls->Add(this->textBox_for_id_department_employee);
 			this->tabPage2->Controls->Add(this->label15);
 			this->tabPage2->Controls->Add(this->Employee_Post_Box);
 			this->tabPage2->Controls->Add(this->label_del_employee);
@@ -778,7 +784,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// button_showall_employee
 			// 
-			this->button_showall_employee->Location = System::Drawing::Point(80, 176);
+			this->button_showall_employee->Location = System::Drawing::Point(70, 213);
 			this->button_showall_employee->Margin = System::Windows::Forms::Padding(1);
 			this->button_showall_employee->Name = L"button_showall_employee";
 			this->button_showall_employee->Size = System::Drawing::Size(237, 33);
@@ -808,7 +814,7 @@ private: System::ComponentModel::IContainer^ components;
 			// label_add_employee
 			// 
 			this->label_add_employee->AutoSize = true;
-			this->label_add_employee->Location = System::Drawing::Point(9, 214);
+			this->label_add_employee->Location = System::Drawing::Point(-1, 251);
 			this->label_add_employee->Name = L"label_add_employee";
 			this->label_add_employee->Size = System::Drawing::Size(148, 22);
 			this->label_add_employee->TabIndex = 27;
@@ -816,7 +822,7 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// button_add_employee
 			// 
-			this->button_add_employee->Location = System::Drawing::Point(80, 135);
+			this->button_add_employee->Location = System::Drawing::Point(70, 172);
 			this->button_add_employee->Name = L"button_add_employee";
 			this->button_add_employee->Size = System::Drawing::Size(237, 32);
 			this->button_add_employee->TabIndex = 26;
@@ -1495,6 +1501,22 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			this->contextMenuStrip1->Name = L"contextMenuStrip1";
 			this->contextMenuStrip1->Size = System::Drawing::Size(61, 4);
+			// 
+			// label29
+			// 
+			this->label29->AutoSize = true;
+			this->label29->Location = System::Drawing::Point(44, 140);
+			this->label29->Name = L"label29";
+			this->label29->Size = System::Drawing::Size(98, 22);
+			this->label29->TabIndex = 37;
+			this->label29->Text = L"ID Отдела";
+			// 
+			// textBox_for_id_department_employee
+			// 
+			this->textBox_for_id_department_employee->Location = System::Drawing::Point(197, 140);
+			this->textBox_for_id_department_employee->Name = L"textBox_for_id_department_employee";
+			this->textBox_for_id_department_employee->Size = System::Drawing::Size(167, 29);
+			this->textBox_for_id_department_employee->TabIndex = 36;
 			// 
 			// MyForm
 			// 

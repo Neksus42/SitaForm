@@ -218,9 +218,11 @@ void SitaForm::MyForm::add_employee()
         std::string post = ConvertString(this->Employee_Post_Box->Text);
         std::string phone = ConvertString(this->Employee_phone_Box->Text);
         std::string name = ConvertString(this->Employee_name_Box->Text);
+        std::string id_department = ConvertString(this->textBox_for_id_department_employee->Text);
         std::cout << "E_Name: " + name + "\n";
         std::cout << "E_Phone: " + phone + "\n";
         std::cout << "E_Post: " + post + "\n";
+        std::cout << "E_Department: " + id_department + "\n";
         if (name == "")
         {
             this->label_add_employee->Text = L"Введите имя работника";
@@ -232,7 +234,7 @@ void SitaForm::MyForm::add_employee()
             return;
         }
 
-        std::string checkexisted = "SELECT * FROM sita.employee where Telephone_number ="+phone+";";
+        std::string checkexisted = "SELECT * FROM lerbd.сотрудник where Номер_телефона ="+phone+";";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -243,7 +245,7 @@ void SitaForm::MyForm::add_employee()
         }
         else
         {
-            std::string addclient = "INSERT INTO `sita`.`employee` (`Name`, `Post`, `Telephone_number`) VALUES ('" + name + "', '" + post + "', '"+phone+"');";
+            std::string addclient = "INSERT INTO `lerbd`.`сотрудник` (`ФИО`, `Должность`, `Номер_телефона`,`ID_отдел`) VALUES ('" + name + "', '" + post + "', '"+phone+"','" + id_department + "');";
 
             std::cout << addclient + "\n";
             stmt = con->createStatement();
@@ -277,7 +279,7 @@ void SitaForm::MyForm::delete_employee()
             return;
         }
 
-        std::string checkexisted = "SELECT * FROM sita.employee where idEmployee = '" + id + "';";
+        std::string checkexisted = "SELECT * FROM lerbd.сотрудник where ID_сотрудник = '" + id + "';";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -288,7 +290,7 @@ void SitaForm::MyForm::delete_employee()
         }
         else
         {
-            std::string addclient = "DELETE FROM `sita`.`employee` WHERE (`idEmployee` = '" + id + "');";
+            std::string addclient = "DELETE FROM `lerbd`.`сотрудник` WHERE (`ID_сотрудник` = '" + id + "');";
             std::cout << addclient + "\n";
             stmt = con->createStatement();
             stmt->executeUpdate(addclient);
@@ -309,7 +311,7 @@ void SitaForm::MyForm::show_all_employee()
     {
         
         
-        std::string selectQuery = "SELECT * FROM sita.employee;";
+        std::string selectQuery = "SELECT * FROM lerbd.сотрудник;";
         stmt = con->createStatement();
         res = stmt->executeQuery(selectQuery);
 
@@ -317,19 +319,21 @@ void SitaForm::MyForm::show_all_employee()
         System::Data::DataTable^ dataTable2 = gcnew System::Data::DataTable();
 
         
-        dataTable2->Columns->Add("ID", int::typeid);
-        dataTable2->Columns->Add("Name", String::typeid);
-        dataTable2->Columns->Add("Telephone number", String::typeid);
-        dataTable2->Columns->Add("Post", String::typeid);
+        dataTable2->Columns->Add("ID_сотрудник", int::typeid);
+        dataTable2->Columns->Add("ФИО", String::typeid);
+        dataTable2->Columns->Add("Номер_телефона", String::typeid);
+        dataTable2->Columns->Add("Должность", String::typeid);
+        dataTable2->Columns->Add("ID_отдел", int::typeid);
         while (res->next())
         {
 
-            int id = res->getInt("idEmployee");
-            std::string name = res->getString("Name");
-            std::string contactInfo = res->getString("Telephone_number");
-            std::string post = res->getString("Post");
+            int id = res->getInt("ID_сотрудник");
+            std::string name = res->getString("ФИО");
+            std::string contactInfo = res->getString("Номер_телефона");
+            std::string post = res->getString("Должность");
+            int id_department = res->getInt("ID_отдел");
             std::cerr << "id" + std::to_string(id) << std::endl;
-            dataTable2->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()),gcnew String(post.c_str()));
+            dataTable2->Rows->Add(id, gcnew String(name.c_str()), gcnew String(contactInfo.c_str()),gcnew String(post.c_str()),id_department);
         }
 
         
