@@ -116,7 +116,7 @@ System::Void SitaForm::MyForm::button_show_all_asign_Click(System::Object^ sende
 System::Void SitaForm::MyForm::textBox_for_selected_asign_Enter(System::Object^ sender, System::EventArgs^ e)
 {
     
-    if (textBox_for_selected_asign->Text == placeholderText_for_asign || textBox_selected_report->Text == "Error") {
+    if (textBox_for_selected_asign->Text == placeholderText_for_asign || textBox_forOrder->Text == "Error") {
         textBox_for_selected_asign->Text = "";
         textBox_for_selected_asign->ForeColor = System::Drawing::Color::Black; 
     }

@@ -134,9 +134,9 @@
     <ClCompile Include="Departments.cpp" />
     <ClCompile Include="Diagram.cpp" />
     <ClCompile Include="Making_Order.cpp" />
+    <ClCompile Include="managers.cpp" />
     <ClCompile Include="MyForm.cpp" />
     <ClCompile Include="Orders.cpp" />
-    <ClCompile Include="reports.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MyForm.h">
