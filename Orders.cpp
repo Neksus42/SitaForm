@@ -18,7 +18,7 @@ System::Void SitaForm::MyForm::button_delete_order_Click(System::Object^ sender,
 {
     std::string idOrder = ConvertString(this->textBox_forOrder->Text);
     std::cout << "id " + idOrder << std::endl;
-    std::string selectQuery = "SELECT * FROM sita.orders where OrderID = " + idOrder + ";";
+    std::string selectQuery = "SELECT * FROM lerbd.заказ where ID_заказ = " + idOrder + ";";
     if (!validation_digits(idOrder))
     {
         this->textBox_forOrder->Text = "Error";
@@ -33,8 +33,8 @@ System::Void SitaForm::MyForm::button_delete_order_Click(System::Object^ sender,
     }
     else
     {
-        stmt->executeUpdate("DELETE FROM `sita`.`devices` WHERE (`OrderID` = '" + idOrder + "');");
-        stmt->executeUpdate("DELETE FROM `sita`.`orders` WHERE (`OrderID` = '" + idOrder + "');");
+        stmt->executeUpdate("DELETE FROM `lerbd`.`заказ` WHERE (`ID_заказ` = '" + idOrder + "');");
+        stmt->executeUpdate("DELETE FROM `lerbd`.`станок` WHERE (`ID_заказ` = '" + idOrder + "');");
         this->Order_Label->Text = "Заказ удалён";
     }
 
@@ -115,7 +115,8 @@ void SitaForm::MyForm::add_order()
     try
     {
         std::string idclient = ConvertString(this->ID_Client_Box->Text);
-
+        std::string idmanager = ConvertString(this->textBox_order_managerID->Text);
+        std::string idEmployee = ConvertString(this->textBox_order_ID_Employee->Text);
         std::string price = ConvertString(this->Price_Box->Text);
         std::cout << "E_idclient: " + idclient + "\n";
         std::cout << "E_price: " + price + "\n";
@@ -130,7 +131,7 @@ void SitaForm::MyForm::add_order()
             return;
         }
 
-        std::string checkexisted = "SELECT * FROM sita.customers where idCustomer =" + idclient + ";";
+        std::string checkexisted = "SELECT * FROM lerbd.клиент where ID_клиент =" + idclient + ";";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -141,7 +142,7 @@ void SitaForm::MyForm::add_order()
         }
         else
         {
-            std::string addorder = "INSERT INTO `sita`.`orders` (`idCustomer`, `Price`) VALUES('" + idclient + "', '" + price + "')";
+            std::string addorder = "INSERT INTO `lerbd`.`заказ` (`ID_клиент`, `Стоимость`,`ID_менеджер`,`ID_сотрудник`) VALUES('" + idclient + "', '" + price + "','"+ idmanager +"','"+idEmployee+"')";
 
 
             std::cout << addorder + "\n";
@@ -207,7 +208,7 @@ void SitaForm::MyForm::show_all_orders()
     try
     {
 
-        std::string selectQuery = "SELECT * FROM sita.orders;";
+        std::string selectQuery = "SELECT * FROM lerbd.заказ;";
         stmt = con->createStatement();
         //stmt->execute("SET NAMES 'cp1251'");
         stmt = con->createStatement();
@@ -215,28 +216,61 @@ void SitaForm::MyForm::show_all_orders()
 
         System::Data::DataTable^ dataTable3 = gcnew System::Data::DataTable();
 
-        dataTable3->Columns->Add("OrderID", int::typeid);
-        dataTable3->Columns->Add("idCustomer", int::typeid);
-        dataTable3->Columns->Add("OrderStatus", String::typeid);
-        dataTable3->Columns->Add("Price", double::typeid);
-        dataTable3->Columns->Add("OrderDate", String::typeid);
+        dataTable3->Columns->Add("ID\nзаказ", int::typeid);
+        dataTable3->Columns->Add("ID\nклиент", int::typeid);
+        dataTable3->Columns->Add("ID\nменеджер", int::typeid);
+        dataTable3->Columns->Add("ID\nсотрудник", int::typeid);
+
+        dataTable3->Columns->Add("Стоимость", double::typeid);
+        dataTable3->Columns->Add("Дата\nоформления заказа", String::typeid);
+        dataTable3->Columns->Add("Дата\nвыполнения заказа", String::typeid);
         while (res->next())
         {
 
-            int OrderID = res->getInt("OrderID");
-            int idCustomer = res->getInt("idCustomer");
-            std::string OrderStatus = res->getString("OrderStatus");
+            int OrderID = res->getInt("ID_заказ");
+            int idCustomer = res->getInt("ID_клиент");
+
+            int idManager = res->getInt("ID_менеджер");
+            int idEmployee = res->getInt("ID_сотрудник");
 
 
 
-            double Price = res->getDouble("Price");
-            std::string OrderDate = res->getString("OrderDate");
-            std::cerr << "id" + std::to_string(OrderID) << "\t" + OrderStatus << std::endl;
 
-            dataTable3->Rows->Add(OrderID, idCustomer, gcnew String(OrderStatus.c_str()), Price, gcnew String(OrderDate.c_str()));
+            double Price = res->getDouble("Стоимость");
+            std::string OrderDate = res->getString("Дата_оформления_заказа");
+            std::string OrdercompleteDate = res->getString("Дата_выполнения_заказа");
+            std::cerr << "id" + std::to_string(OrderID) << std::endl;
+
+            dataTable3->Rows->Add(OrderID, idCustomer, idManager,idEmployee,Price, gcnew String(OrderDate.c_str()), gcnew String(OrdercompleteDate.c_str()));
         }
 
         this->dataGridView2_Orders->DataSource = dataTable3;
+
+        // Уменьшение размера символов в колонках
+        System::Drawing::Font^ smallerFont = gcnew System::Drawing::Font("Microsoft Sans Serif", 10); // Установите нужный шрифт и размер
+        for (int i = 0; i < this->dataGridView2_Orders->Columns->Count; i++)
+        {
+            System::Windows::Forms::DataGridViewColumn^ column = this->dataGridView2_Orders->Columns[i];
+            column->DefaultCellStyle->Font = smallerFont; // Применение уменьшенного шрифта
+        }
+
+        // Настройка ширины колонок
+        for (int i = 0; i < this->dataGridView2_Orders->Columns->Count; i++)
+        {
+            System::Windows::Forms::DataGridViewColumn^ column = this->dataGridView2_Orders->Columns[i];
+            if (i < 4) // Для первых 4 колонок с ID
+            {
+                column->Width = 100; // Установите меньшую ширину
+            }
+            else if (i == 4) // Для колонки "Стоимость"
+            {
+                column->Width = 120; // Средняя ширина
+            }
+            else if (i <= 6) // Для колонки "Дата оформления заказа"
+            {
+                column->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill; // Заполнение оставшегося пространства
+            }
+        }
     }
     catch (sql::SQLException& e)
     {
