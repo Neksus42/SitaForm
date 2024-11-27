@@ -68,7 +68,7 @@ void SitaForm::MyForm::selected_order()
     try
     {
         std::string idOrder = ConvertString(this->textBox_forOrder->Text);
-        std::string selectQuery = "SELECT * FROM sita.devices where OrderID = " + idOrder + ";";
+        std::string selectQuery = "SELECT * FROM lerbd.станок where ID_заказ = " + idOrder + ";";
         if (!validation_digits(idOrder))
         {
             this->textBox_forOrder->Text = "Error";
@@ -81,25 +81,25 @@ void SitaForm::MyForm::selected_order()
 
         System::Data::DataTable^ dataTable3 = gcnew System::Data::DataTable();
 
-        dataTable3->Columns->Add("idDevices", int::typeid);
-        dataTable3->Columns->Add("OrderID", int::typeid);
-        dataTable3->Columns->Add("DeviceType", String::typeid);
+        dataTable3->Columns->Add("ID_станок", int::typeid);
+        dataTable3->Columns->Add("Серийный_номер", int::typeid);
+        dataTable3->Columns->Add("Вид_неисправности", String::typeid);
 
-        dataTable3->Columns->Add("Brand", String::typeid);
+        dataTable3->Columns->Add("ID_заказ", int::typeid);
         while (res->next())
         {
 
-            int OrderID = res->getInt("idDevices");
-            int idCustomer = res->getInt("OrderID");
-            std::string OrderStatus = res->getString("DeviceType");
+            int Machine_ID = res->getInt("ID_станок");
+            int SerialNumber = res->getInt("Серийный_номер");
+            std::string ProblemType = res->getString("Вид_неисправности");
+            int ID_Order = res->getInt("ID_заказ");
 
 
 
+           
+            std::cerr << "id" + std::to_string(Machine_ID) << "\t" + std::to_string(ID_Order) << std::endl;
 
-            std::string OrderDate = res->getString("Brand");
-            std::cerr << "id" + std::to_string(OrderID) << "\t" + OrderStatus << std::endl;
-
-            dataTable3->Rows->Add(OrderID, idCustomer, gcnew String(OrderStatus.c_str()), gcnew String(OrderDate.c_str()));
+            dataTable3->Rows->Add(Machine_ID, SerialNumber, gcnew String(ProblemType.c_str()), ID_Order);
         }
 
         this->dataGridView2_Orders->DataSource = dataTable3;
@@ -163,11 +163,11 @@ void SitaForm::MyForm::add_device()
     try
     {
         std::string idorder = ConvertString(this->ID_Order_Box->Text);
-        std::string DeviceType = ConvertString(this->DeviceType_Box->Text);
-        std::string Brand = ConvertString(this->Brand_Box->Text);
+        std::string SerialNumber = ConvertString(this->SerialNumber_Box->Text);
+        std::string problem_type = ConvertString(this->comboBox_problem_type->Text);
         std::cout << "E_idclient: " + idorder + "\n";
-        std::cout << "E_DeviceType: " + DeviceType + "\n";
-        std::cout << "E_price: " + Brand + "\n";
+        std::cout << "E_SerialNumber: " + SerialNumber + "\n";
+        std::cout << "E_problem_type: " + problem_type + "\n";
         if (idorder == "")
         {
             this->label_add_device->Text = L"Введите ID заказа";
@@ -175,7 +175,7 @@ void SitaForm::MyForm::add_device()
         }
 
 
-        std::string checkexisted = "SELECT * FROM sita.orders where OrderID =" + idorder + ";";
+        std::string checkexisted = "SELECT * FROM lerbd.заказ where ID_заказ =" + idorder + ";";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -186,14 +186,14 @@ void SitaForm::MyForm::add_device()
         }
         else
         {
-            std::string adddevice = "INSERT INTO `sita`.`devices` (`OrderID`, `DeviceType`, `Brand`) VALUES('" + idorder + "', '" + DeviceType + "', '" + Brand + "')";
+            std::string adddevice = "INSERT INTO `lerbd`.`станок` (`ID_заказ`, `Серийный_номер`, `Вид_неисправности`) VALUES('" + idorder + "', '" + SerialNumber + "', '" + problem_type + "')";
 
 
 
             std::cout << adddevice + "\n";
             stmt = con->createStatement();
             stmt->executeUpdate(adddevice);
-            this->label_add_device->Text = L"Устройство успешно добавлено";
+            this->label_add_device->Text = L"Станок успешно добавлен";
         }
 
     }
