@@ -1,5 +1,5 @@
 #include "MyForm.h"
-
+#include <format>
  using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Text;
@@ -163,3 +163,4 @@ System::Void SitaForm::MyForm::button7_Click(System::Object^ sender, System::Eve
         this->label_for_asign->Text = "Связь удалена";
     }
 }
+

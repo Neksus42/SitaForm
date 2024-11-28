@@ -9,7 +9,7 @@
 #include <regex>
 #include<thread>
 #include<chrono>
-
+#include<format>
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Text;
@@ -49,20 +49,20 @@ System::Void SitaForm::MyForm::dataGridView2_Orders_CellClick(System::Object^ se
     
 }
 
-void SitaForm::MyForm::combobox_selected_event()
-{
-    if (!(validation_digits(ConvertString(this->textBox_forOrder->Text))))
-    {
-        this->textBox_forOrder->Text = "Error";
-        return;
-    }
-    else
-    {
-        //UPDATE `sita`.`orders` SET `OrderStatus` = 'Ремонт' WHERE (`OrderID` = '2');
-        stmt = con->createStatement();
-        stmt->executeUpdate("UPDATE `sita`.`orders` SET `OrderStatus` = '" + ConvertString(this->comboBox1_Status->Text) + "' WHERE (`OrderID` = '" + ConvertString(this->textBox_forOrder->Text) + "')");
-    }
-}
+//void SitaForm::MyForm::combobox_selected_event()
+//{
+//    if (!(validation_digits(ConvertString(this->textBox_forOrder->Text))))
+//    {
+//        this->textBox_forOrder->Text = "Error";
+//        return;
+//    }
+//    else
+//    {
+//        //UPDATE `sita`.`orders` SET `OrderStatus` = 'Ремонт' WHERE (`OrderID` = '2');
+//        stmt = con->createStatement();
+//        stmt->executeUpdate("UPDATE `sita`.`orders` SET `OrderStatus` = '" + ConvertString(this->comboBox1_Status->Text) + "' WHERE (`OrderID` = '" + ConvertString(this->textBox_forOrder->Text) + "')");
+//    }
+//}
 void SitaForm::MyForm::selected_order()
 {
     try
@@ -246,15 +246,15 @@ void SitaForm::MyForm::show_all_orders()
 
         this->dataGridView2_Orders->DataSource = dataTable3;
 
-        // Уменьшение размера символов в колонках
-        System::Drawing::Font^ smallerFont = gcnew System::Drawing::Font("Microsoft Sans Serif", 10); // Установите нужный шрифт и размер
+     
+        System::Drawing::Font^ smallerFont = gcnew System::Drawing::Font("Microsoft Sans Serif", 10); 
         for (int i = 0; i < this->dataGridView2_Orders->Columns->Count; i++)
         {
             System::Windows::Forms::DataGridViewColumn^ column = this->dataGridView2_Orders->Columns[i];
-            column->DefaultCellStyle->Font = smallerFont; // Применение уменьшенного шрифта
+            column->DefaultCellStyle->Font = smallerFont; 
         }
 
-        // Настройка ширины колонок
+       
         for (int i = 0; i < this->dataGridView2_Orders->Columns->Count; i++)
         {
             System::Windows::Forms::DataGridViewColumn^ column = this->dataGridView2_Orders->Columns[i];
@@ -289,7 +289,7 @@ void SitaForm::MyForm::change_combobox()
 
 
 
-        std::string checkexisted = "SELECT * FROM sita.orders where OrderID =" + idOrder + ";";
+        std::string checkexisted = "SELECT * FROM lerbd.заказ where ID_заказ =" + idOrder + ";";
         std::cout << checkexisted + "\n";
         stmt = con->createStatement();
         res = stmt->executeQuery(checkexisted);
@@ -302,8 +302,18 @@ void SitaForm::MyForm::change_combobox()
         {
             //gcnew String(res->getString("OrderStatus").c_str())
 
-            this->comboBox1_Status->SelectedItem = gcnew String(res->getString("OrderStatus").c_str());
-            std::cout << res->getString("OrderStatus") << std::endl;
+            //this->comboBox1_Status->SelectedItem = gcnew String(res->getString("OrderStatus").c_str());
+            if (res->isNull("Дата_выполнения_заказа"))
+            {
+                this->label_order_status->Text = L"В процессе";
+                std::cout << idOrder +" Status: NULL"  << std::endl;
+            }
+            else
+            {
+                this->label_order_status->Text = L"Выполнен";
+                std::cout << res->getString("Дата_выполнения_заказа") << std::endl;
+            }
+            
 
         }
 
@@ -311,6 +321,34 @@ void SitaForm::MyForm::change_combobox()
     catch (sql::SQLException& e)
     {
         std::cerr << "SQL Error: " << e.what() << std::endl;
+    }
+
+}
+System::Void SitaForm::MyForm::button_confirm_order_status_date_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    /*UPDATE lerbd.заказ
+        SET Дата_выполнения_заказа = NOW()
+        WHERE ID_заказ = 5 AND Дата_выполнения_заказа IS NULL;*/
+
+    try
+    {
+        std::string idOrder = ConvertString(this->textBox_forOrder->Text);
+        if (!validation_digits(idOrder)) return;
+        std::cout << "id " + idOrder << std::endl;
+
+        std::string selectQuery = std::format(R"(
+    UPDATE lerbd.заказ
+    SET Дата_выполнения_заказа = NOW()
+    WHERE ID_заказ = {} AND Дата_выполнения_заказа IS NULL;)", idOrder);
+        stmt = con->createStatement();
+        stmt->executeUpdate(selectQuery);
+        show_all_orders();
+        this->textBox_forOrder->Text = "";
+        textBox_forOrder_Leave(this, gcnew EventArgs());
+    }
+    catch (sql::SQLException& e)
+    {
+        MessageBox::Show(gcnew String(e.what()), "SQL Error", MessageBoxButtons::OK, MessageBoxIcon::Error);
     }
 
 }

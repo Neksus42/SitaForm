@@ -131,7 +131,7 @@ namespace SitaForm {
 	private: System::Windows::Forms::Label^ label17;
 	private: System::Windows::Forms::Label^ label18;
 	private: System::Windows::Forms::TextBox^ ID_Client_Box;
-	private: System::Windows::Forms::ComboBox^ comboBox1_Status;
+
 
 
 
@@ -232,6 +232,10 @@ private: System::Windows::Forms::TextBox^ textBox_order_ID_Employee;
 private: System::Windows::Forms::Label^ label23;
 private: System::Windows::Forms::TextBox^ textBox_order_managerID;
 private: System::Windows::Forms::ComboBox^ comboBox_problem_type;
+private: System::Windows::Forms::Button^ button_confirm_order_status_date;
+
+private: System::Windows::Forms::Label^ label_order_status;
+
 
 
 private: System::ComponentModel::IContainer^ components;
@@ -269,7 +273,7 @@ private: System::ComponentModel::IContainer^ components;
 		void show_all_orders();
 		void change_combobox();
 		void selected_order();
-		void combobox_selected_event();
+		//void combobox_selected_event();
 		//void datagridlclick();
 
 
@@ -278,9 +282,9 @@ private: System::ComponentModel::IContainer^ components;
 		void InitializeComponent(void)
 		{
 			this->components = (gcnew System::ComponentModel::Container());
-			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea2 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
-			System::Windows::Forms::DataVisualization::Charting::Legend^ legend2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
-			System::Windows::Forms::DataVisualization::Charting::Series^ series2 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
+			System::Windows::Forms::DataVisualization::Charting::ChartArea^ chartArea1 = (gcnew System::Windows::Forms::DataVisualization::Charting::ChartArea());
+			System::Windows::Forms::DataVisualization::Charting::Legend^ legend1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Legend());
+			System::Windows::Forms::DataVisualization::Charting::Series^ series1 = (gcnew System::Windows::Forms::DataVisualization::Charting::Series());
 			this->tabControl1 = (gcnew System::Windows::Forms::TabControl());
 			this->tabPage1 = (gcnew System::Windows::Forms::TabPage());
 			this->label7 = (gcnew System::Windows::Forms::Label());
@@ -330,6 +334,8 @@ private: System::ComponentModel::IContainer^ components;
 			this->Employee_name_Box = (gcnew System::Windows::Forms::TextBox());
 			this->Employee_phone_Box = (gcnew System::Windows::Forms::TextBox());
 			this->tabPage3 = (gcnew System::Windows::Forms::TabPage());
+			this->button_confirm_order_status_date = (gcnew System::Windows::Forms::Button());
+			this->label_order_status = (gcnew System::Windows::Forms::Label());
 			this->comboBox_problem_type = (gcnew System::Windows::Forms::ComboBox());
 			this->label24 = (gcnew System::Windows::Forms::Label());
 			this->textBox_order_ID_Employee = (gcnew System::Windows::Forms::TextBox());
@@ -349,7 +355,6 @@ private: System::ComponentModel::IContainer^ components;
 			this->SerialNumber_Box = (gcnew System::Windows::Forms::TextBox());
 			this->label19 = (gcnew System::Windows::Forms::Label());
 			this->ID_Order_Box = (gcnew System::Windows::Forms::TextBox());
-			this->comboBox1_Status = (gcnew System::Windows::Forms::ComboBox());
 			this->label16 = (gcnew System::Windows::Forms::Label());
 			this->Price_Box = (gcnew System::Windows::Forms::TextBox());
 			this->label17 = (gcnew System::Windows::Forms::Label());
@@ -917,6 +922,8 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// tabPage3
 			// 
+			this->tabPage3->Controls->Add(this->button_confirm_order_status_date);
+			this->tabPage3->Controls->Add(this->label_order_status);
 			this->tabPage3->Controls->Add(this->comboBox_problem_type);
 			this->tabPage3->Controls->Add(this->label24);
 			this->tabPage3->Controls->Add(this->textBox_order_ID_Employee);
@@ -936,7 +943,6 @@ private: System::ComponentModel::IContainer^ components;
 			this->tabPage3->Controls->Add(this->SerialNumber_Box);
 			this->tabPage3->Controls->Add(this->label19);
 			this->tabPage3->Controls->Add(this->ID_Order_Box);
-			this->tabPage3->Controls->Add(this->comboBox1_Status);
 			this->tabPage3->Controls->Add(this->label16);
 			this->tabPage3->Controls->Add(this->Price_Box);
 			this->tabPage3->Controls->Add(this->label17);
@@ -951,6 +957,25 @@ private: System::ComponentModel::IContainer^ components;
 			this->tabPage3->TabIndex = 2;
 			this->tabPage3->Text = L"Заказы";
 			this->tabPage3->Click += gcnew System::EventHandler(this, &MyForm::tabPage3_Click);
+			// 
+			// button_confirm_order_status_date
+			// 
+			this->button_confirm_order_status_date->Location = System::Drawing::Point(528, 275);
+			this->button_confirm_order_status_date->Name = L"button_confirm_order_status_date";
+			this->button_confirm_order_status_date->Size = System::Drawing::Size(236, 35);
+			this->button_confirm_order_status_date->TabIndex = 64;
+			this->button_confirm_order_status_date->Text = L"Выполнить заказ";
+			this->button_confirm_order_status_date->UseVisualStyleBackColor = true;
+			this->button_confirm_order_status_date->Click += gcnew System::EventHandler(this, &MyForm::button_confirm_order_status_date_Click);
+			// 
+			// label_order_status
+			// 
+			this->label_order_status->AutoSize = true;
+			this->label_order_status->Location = System::Drawing::Point(692, 247);
+			this->label_order_status->Name = L"label_order_status";
+			this->label_order_status->Size = System::Drawing::Size(105, 22);
+			this->label_order_status->TabIndex = 63;
+			this->label_order_status->Text = L"Не выбран";
 			// 
 			// comboBox_problem_type
 			// 
@@ -1135,21 +1160,6 @@ private: System::ComponentModel::IContainer^ components;
 			this->ID_Order_Box->Size = System::Drawing::Size(167, 29);
 			this->ID_Order_Box->TabIndex = 43;
 			// 
-			// comboBox1_Status
-			// 
-			this->comboBox1_Status->DropDownStyle = System::Windows::Forms::ComboBoxStyle::DropDownList;
-			this->comboBox1_Status->FormattingEnabled = true;
-			this->comboBox1_Status->Items->AddRange(gcnew cli::array< System::Object^  >(4) {
-				L"Ожидание", L"Диагностика", L"Ремонт",
-					L"Завершён"
-			});
-			this->comboBox1_Status->Location = System::Drawing::Point(696, 244);
-			this->comboBox1_Status->Margin = System::Windows::Forms::Padding(1);
-			this->comboBox1_Status->Name = L"comboBox1_Status";
-			this->comboBox1_Status->Size = System::Drawing::Size(167, 30);
-			this->comboBox1_Status->TabIndex = 42;
-			this->comboBox1_Status->SelectedIndexChanged += gcnew System::EventHandler(this, &MyForm::comboBox1_Status_SelectedIndexChanged);
-			// 
 			// label16
 			// 
 			this->label16->AutoSize = true;
@@ -1171,9 +1181,9 @@ private: System::ComponentModel::IContainer^ components;
 			this->label17->AutoSize = true;
 			this->label17->Location = System::Drawing::Point(524, 247);
 			this->label17->Name = L"label17";
-			this->label17->Size = System::Drawing::Size(130, 22);
+			this->label17->Size = System::Drawing::Size(135, 22);
 			this->label17->TabIndex = 39;
-			this->label17->Text = L"Статус заказа";
+			this->label17->Text = L"Статус заказа:";
 			// 
 			// label18
 			// 
@@ -1532,17 +1542,17 @@ private: System::ComponentModel::IContainer^ components;
 			// 
 			// chart1
 			// 
-			chartArea2->Name = L"ChartArea1";
-			this->chart1->ChartAreas->Add(chartArea2);
-			legend2->Name = L"Legend1";
-			this->chart1->Legends->Add(legend2);
+			chartArea1->Name = L"ChartArea1";
+			this->chart1->ChartAreas->Add(chartArea1);
+			legend1->Name = L"Legend1";
+			this->chart1->Legends->Add(legend1);
 			this->chart1->Location = System::Drawing::Point(217, 88);
 			this->chart1->Margin = System::Windows::Forms::Padding(1);
 			this->chart1->Name = L"chart1";
-			series2->ChartArea = L"ChartArea1";
-			series2->Legend = L"Legend1";
-			series2->Name = L"Series1";
-			this->chart1->Series->Add(series2);
+			series1->ChartArea = L"ChartArea1";
+			series1->Legend = L"Legend1";
+			series1->Name = L"Series1";
+			this->chart1->Series->Add(series1);
 			this->chart1->Size = System::Drawing::Size(535, 281);
 			this->chart1->TabIndex = 1;
 			this->chart1->Text = L"chart1";
@@ -1661,16 +1671,16 @@ private: System::Void textBox_forOrder_Leave(System::Object^ sender, System::Eve
 		textBox_forOrder->ForeColor = System::Drawing::Color::LightGray; 
 		return;
 	}
-	change_combobox();
+	//change_combobox();
 }
 
 	  
 private: System::Void button_selected_order_Click(System::Object^ sender, System::EventArgs^ e) {
 	selected_order();
 }
-private: System::Void comboBox1_Status_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
-	combobox_selected_event();
-}
+//private: System::Void comboBox1_Status_SelectedIndexChanged(System::Object^ sender, System::EventArgs^ e) {
+//	combobox_selected_event();
+//}
 private: System::Void dataGridView2_Orders_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e);
 	
 
@@ -1704,6 +1714,7 @@ private: System::Void button_to_delete_department_Click(System::Object^ sender, 
 private: System::Void button_add_manager_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_show_allmanagers_Click(System::Object^ sender, System::EventArgs^ e);
 private: System::Void button_manager_delete_Click(System::Object^ sender, System::EventArgs^ e);
+private: System::Void button_confirm_order_status_date_Click(System::Object^ sender, System::EventArgs^ e);
 };
 
 
