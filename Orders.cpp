@@ -13,6 +13,7 @@
 using namespace System;
 using namespace System::Windows::Forms;
 using namespace System::Text;
+using namespace System::Collections::Generic;
 
 System::Void SitaForm::MyForm::button_delete_order_Click(System::Object^ sender, System::EventArgs^ e)
 {
@@ -40,13 +41,81 @@ System::Void SitaForm::MyForm::button_delete_order_Click(System::Object^ sender,
 
 
 }
+System::Void SitaForm::MyForm::tabPage3_Click(System::Object^ sender, System::EventArgs^ e)
+{
+    
+}
+
+
+System::Void SitaForm::MyForm::tabPage3_Enter(System::Object^ sender, System::EventArgs^ e)
+{
+
+    //List<ClientInfo^>^ clients = gcnew List<ClientInfo^>();
+
+    std::cout << "Button: Orders click\n";
+    this->comboBox_idCLients->Items->Clear();
+    this->comboBox_idManagers->Items->Clear();
+    this->comboBox_idEmployees->Items->Clear();
+    std::string selectQuery = "SELECT * FROM lerbd.клиент;";
+    stmt = con->createStatement();
+    res = stmt->executeQuery(selectQuery);
+
+    while (res->next()) {
+        // Преобразуем ID и Name в System::String^
+        System::String^ idClient = res->getInt("ID_клиент").ToString();
+        System::String^ fioClient = gcnew System::String(res->getString("ФИО").c_str());
+
+        // Создаем объект ClientInfo
+        SitaForm::ClientInfo^ client = gcnew SitaForm::ClientInfo(idClient, fioClient);
+
+        // Добавляем клиента в список
+        clients->Add(client);
+
+        // Добавляем строку в ComboBox
+        comboBox_idCLients->Items->Add(client->ToString());
+    }
+    selectQuery = "SELECT * FROM lerbd.менеджер;";
+    stmt = con->createStatement();
+    res = stmt->executeQuery(selectQuery);
+    while (res->next()) {
+        // Преобразуем ID и Name в System::String^
+        System::String^ idClient = res->getInt("ID_менеджер").ToString();
+        System::String^ fioClient = gcnew System::String(res->getString("ФИО").c_str());
+
+        // Создаем объект ClientInfo
+        SitaForm::ManagerInfo^ manager = gcnew SitaForm::ManagerInfo(idClient, fioClient);
+
+        // Добавляем клиента в список
+        managers->Add(manager);
+
+        // Добавляем строку в ComboBox
+        comboBox_idManagers->Items->Add(manager->ToString());
+    }
+    selectQuery = "SELECT * FROM lerbd.сотрудник;";
+    stmt = con->createStatement();
+    res = stmt->executeQuery(selectQuery);
+    while (res->next()) {
+        // Преобразуем ID и Name в System::String^
+        System::String^ idClient = res->getInt("ID_сотрудник").ToString();
+        System::String^ fioClient = gcnew System::String(res->getString("ФИО").c_str());
+
+        // Создаем объект ClientInfo
+        SitaForm::EmployeeInfo^ employee = gcnew SitaForm::EmployeeInfo(idClient, fioClient);
+
+        // Добавляем клиента в список
+        employees->Add(employee);
+
+        // Добавляем строку в ComboBox
+        comboBox_idEmployees->Items->Add(employee->ToString());
+    }
+}
 System::Void SitaForm::MyForm::dataGridView2_Orders_CellClick(System::Object^ sender, System::Windows::Forms::DataGridViewCellEventArgs^ e)
 {
     if (e->RowIndex < 0) return;
         this->textBox_forOrder_Enter(this->textBox_forOrder, gcnew System::EventArgs());
         this->textBox_forOrder->Text = (this->dataGridView2_Orders->Rows[e->RowIndex]->Cells[0]->Value->ToString());
         this->textBox_forOrder_Leave(this->textBox_forOrder, gcnew System::EventArgs());
-    
+        change_combobox();
 }
 
 //void SitaForm::MyForm::combobox_selected_event()
@@ -114,9 +183,11 @@ void SitaForm::MyForm::add_order()
 {
     try
     {
-        std::string idclient = ConvertString(this->ID_Client_Box->Text);
-        std::string idmanager = ConvertString(this->textBox_order_managerID->Text);
-        std::string idEmployee = ConvertString(this->textBox_order_ID_Employee->Text);
+        
+        
+        std::string idclient = ConvertString(this->clients[this->comboBox_idCLients->SelectedIndex]->ID);
+        std::string idmanager = ConvertString(this->managers[this->comboBox_idManagers->SelectedIndex]->ID);
+        std::string idEmployee = ConvertString(this->employees[this->comboBox_idEmployees->SelectedIndex]->ID);
         std::string price = ConvertString(this->Price_Box->Text);
         std::cout << "E_idclient: " + idclient + "\n";
         std::cout << "E_price: " + price + "\n";
@@ -271,6 +342,7 @@ void SitaForm::MyForm::show_all_orders()
                 column->AutoSizeMode = System::Windows::Forms::DataGridViewAutoSizeColumnMode::Fill; // Заполнение оставшегося пространства
             }
         }
+       
     }
     catch (sql::SQLException& e)
     {
