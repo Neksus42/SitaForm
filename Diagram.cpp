@@ -5,10 +5,11 @@ using namespace System::Windows::Forms;
 using namespace System::Text;
 using namespace System::Windows::Forms::DataVisualization::Charting;
 
-System::Void SitaForm::MyForm::button8_Click(System::Object^ sender, System::EventArgs^ e)
+
+System::Void SitaForm::MyForm::TabPage6Enter(System::Object^ sender, System::EventArgs^ e)
 {
     std::vector<int> vec;
-    std::string selectQuery = "SELECT * FROM sita.reports;";
+    std::string selectQuery = "SELECT * FROM lerbd.станок;";
     stmt = con->createStatement();
     //stmt->execute("SET NAMES 'cp1251'");
     vec.push_back(0);
@@ -20,12 +21,12 @@ System::Void SitaForm::MyForm::button8_Click(System::Object^ sender, System::Eve
 
     while (res->next())
     {
-        std::string tocheck = res->getString("Problem_Category");
-        if (tocheck == "Ноутбук")
+        std::string tocheck = res->getString("Вид_неисправности");
+        if (tocheck == "Обслуживание")
             ++vec[0];
-        if (tocheck == "ПК Системный блок")
+        if (tocheck == "Замена детали")
             ++vec[1];
-        if (tocheck == "Телефон")
+        if (tocheck == "Диагностика")
             ++vec[2];
         if (tocheck == "Другое")
             ++vec[3];
@@ -40,14 +41,14 @@ System::Void SitaForm::MyForm::button8_Click(System::Object^ sender, System::Eve
         this->chart1->ChartAreas->Add(chartArea);
     }
 
-    // Проверяем, есть ли уже Series с именем "PieSeries"
-    if (this->chart1->Series->IndexOf("PieSeries") == -1) {
+    if (this->chart1->Series->IndexOf("Виды неисправности") == -1) {
         Series^ series = gcnew Series();
-        series->Name = "Problem_Category";
-        //series->ChartType = SeriesChartType::Pie;  // Круговая диаграмма
-        series->Points->AddXY("Ноутбук", vec[0]);
-        series->Points->AddXY("ПК Системный блок", vec[1]);
-        series->Points->AddXY("Телефон", vec[2]);
+        series->Name = "Виды неисправности";
+        //series->ChartType = SeriesChartType::Pie; // Убедитесь, что это круговая диаграмма
+
+        series->Points->AddXY("Обслуживание", vec[0]);
+        series->Points->AddXY("Замена детали", vec[1]);
+        series->Points->AddXY("Диагностика", vec[2]);
         series->Points->AddXY("Другое", vec[3]);
 
         // Настройка цветов и меток
@@ -56,11 +57,15 @@ System::Void SitaForm::MyForm::button8_Click(System::Object^ sender, System::Eve
         series->Points[2]->Color = System::Drawing::Color::Blue;
         series->Points[3]->Color = System::Drawing::Color::Yellow;
 
-        // Настройка легенды и отображаемых меток
-       /* series->Points[0]->Label = "30%";
-        series->Points[0]->LegendText = "Category 1";*/
-
         this->chart1->Series->Add(series);
     }
-
+    else {
+        // Если серия уже существует, обновляем данные
+        Series^ existingSeries = this->chart1->Series["Виды неисправности"];
+        existingSeries->Points->Clear(); // Удаляем старые точки
+        existingSeries->Points->AddXY("Обслуживание", vec[0]);
+        existingSeries->Points->AddXY("Замена детали", vec[1]);
+        existingSeries->Points->AddXY("Диагностика", vec[2]);
+        existingSeries->Points->AddXY("Другое", vec[3]);
+    }
 }
